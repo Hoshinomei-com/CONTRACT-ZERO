@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CONTRACT : ZERO — F급 사역사와 규격외 사역마</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Gowun+Batang:wght@400;700&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060914; --bg2:#0b1020; --panel:#0e1428; --line:#1f2a48;
+  --ink:#e9eefb; --mute:#9ca8c8; --dim:#67739a;
+  --gold:#e2c27a; --gold2:#f6dfa2; --light:#bfe3ff; --arc:#7fb6ff;
+  --serif:'Gowun Batang',serif; --display:'Cinzel',serif; --it:'Cormorant Garamond',serif; --sans:'Noto Sans KR',system-ui,sans-serif; --pen:'Nanum Pen Script',cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{max-width:100%;overflow-x:hidden;overflow-x:clip;overscroll-behavior-x:none;touch-action:pan-y pinch-zoom}
+html{scroll-behavior:smooth;scroll-padding-top:56px}
+body{word-break:keep-all;overflow-wrap:anywhere;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased;position:relative}
+body.lock{overflow:hidden}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+img{display:block;max-width:100%}
+::selection{background:#2b4a8a;color:#fff}
+
+/* atmosphere */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(80% 50% at 50% 0%,rgba(60,100,200,.18),transparent 70%),radial-gradient(60% 40% at 100% 70%,rgba(226,194,122,.06),transparent 70%)}
+body::after{content:"";position:fixed;inset:0;z-index:59;pointer-events:none;background:radial-gradient(120% 90% at 50% 40%,transparent 60%,rgba(0,0,8,.6))}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main,header,footer{position:relative;z-index:1}
+
+/* images + protection */
+.ph{position:relative;overflow:hidden;background:radial-gradient(120% 80% at 50% 0%,color-mix(in srgb,var(--c,#7fb6ff) 45%,transparent),transparent 70%),linear-gradient(180deg,#141b33,#090d1a)}
+.ph>span{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-family:var(--display);letter-spacing:.22em;font-weight:700;color:color-mix(in srgb,var(--c,#7fb6ff) 70%,#fff);font-size:13px;text-align:center;padding:10px}
+.ph>span svg{width:36%;max-width:70px;opacity:.7}
+.ph>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
+.ph.char>img{object-position:center 16%}
+.ph>.bb{position:absolute;inset:-30px;z-index:1;background:center/cover no-repeat;filter:blur(22px) brightness(.45) saturate(1.15);display:none}
+.ph.fit>.bb{display:block}
+.ph.fit>img{object-fit:contain;object-position:center}
+.ph.nat.ok{aspect-ratio:auto!important;min-height:0!important}
+.ph.nat.ok>img{position:relative;height:auto}
+.ph,.ph img,#op img,.map image{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-webkit-user-drag:none}
+.ph>img,.ph>.bb,#op img,.map image{pointer-events:none}
+.ph>b.wm{position:absolute;right:22px;bottom:12px;z-index:4;font-family:var(--display);font-weight:500;font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,.62);text-shadow:0 1px 4px rgba(0,0,0,.9);pointer-events:none}
+
+#prog{position:fixed;top:0;left:0;height:2px;width:0;z-index:51;background:linear-gradient(90deg,#2b4a8a,var(--gold));box-shadow:0 0 10px var(--gold)}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:10px 14px 10px 18px;background:linear-gradient(180deg,rgba(6,9,20,.92),rgba(6,9,20,.55));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(226,194,122,.14)}
+nav .logo{font-family:var(--display);font-weight:700;letter-spacing:.16em;font-size:13.5px;text-decoration:none}
+nav .logo b{color:var(--gold)}
+.burger{width:40px;height:40px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.burger i{display:block;width:20px;height:1.5px;background:#e9eefb;transition:.3s}
+.burger i:nth-child(2){width:14px;background:var(--gold)}
+.menu-open .burger i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.menu-open .burger i:nth-child(2){opacity:0}
+.menu-open .burger i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+#menu{position:fixed;inset:0;z-index:49;background:radial-gradient(80% 60% at 50% 30%,rgba(43,74,138,.35),transparent 70%),rgba(6,9,20,.97);display:flex;flex-direction:column;justify-content:center;padding:70px 32px 40px;opacity:0;visibility:hidden;transition:.35s}
+.menu-open #menu{opacity:1;visibility:visible}
+#menu a,#menu button{display:flex;align-items:baseline;gap:14px;padding:11px 0;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.05);text-align:left;width:100%;transform:translateY(10px);opacity:0;transition:.4s}
+.menu-open #menu a,.menu-open #menu button{transform:none;opacity:1}
+#menu .rn{font-family:var(--display);color:var(--gold);width:34px;font-size:13px}
+#menu .kr{font-family:var(--serif);font-size:20px}
+#menu .la{font-family:var(--display);font-size:9.5px;letter-spacing:.22em;color:var(--dim);margin-left:auto}
+#menu .replay{margin-top:18px;border:0;color:var(--mute);font-size:14px}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding:90px 22px 70px;isolation:isolate;overflow:hidden}
+.hero .bg{position:absolute;inset:0;z-index:-3}
+#heroBg.fit>img{object-position:center 14%}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(6,9,20,.4) 0%,rgba(6,9,20,.08) 30%,rgba(6,9,20,.86) 72%,var(--bg) 100%),radial-gradient(70% 50% at 50% 100%,rgba(127,182,255,.22),transparent 70%)}
+.hcircle{position:absolute;z-index:-2;width:min(560px,130vw);aspect-ratio:1;left:50%;top:44%;transform:translate(-50%,-50%);opacity:.32;pointer-events:none}
+.hcircle svg{width:100%;height:100%;animation:spin 90s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-in{max-width:760px;margin:0 auto;width:100%}
+.kicker{font-family:var(--display);letter-spacing:.38em;font-size:10.5px;color:var(--gold);margin-bottom:10px}
+.hero h1{font-family:var(--display);font-weight:900;font-size:clamp(40px,12.5vw,104px);line-height:.95;letter-spacing:.04em;text-shadow:0 0 36px rgba(127,182,255,.55)}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero h1 .z{display:inline-block;background:linear-gradient(180deg,#fff,var(--light) 60%,#6aa2ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-family:var(--serif);font-size:clamp(16px,4.3vw,22px);margin-top:12px;color:#eef3ff;display:flex;align-items:center;gap:10px}
+.hero .sub::before{content:"";width:26px;height:1px;background:var(--gold);flex:none}
+.hero .desc{color:#b9c4e2;margin-top:14px;font-size:14.5px;max-width:540px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.tags span{font-size:12px;padding:4px 10px;border:1px solid rgba(226,194,122,.35);border-radius:99px;color:#f1e3bd;background:rgba(226,194,122,.06)}
+.meta{display:flex;gap:18px;margin-top:20px;font-size:12.5px;color:var(--mute);flex-wrap:wrap}
+.meta b{color:#fff}
+.cta{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:700;font-size:14.5px;text-decoration:none;transition:.2s}
+.btn.gold{background:linear-gradient(135deg,#f3d897,#c99a45);color:#1a1405;box-shadow:0 8px 30px -10px rgba(226,194,122,.9),inset 0 0 0 1px rgba(255,255,255,.3)}
+.btn.gold::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:shine 4s ease-in-out infinite}
+@keyframes shine{0%,70%{left:-60%}100%{left:130%}}
+.btn.gold:hover{transform:translateY(-2px)}
+.btn.ghost{border:1px solid rgba(127,182,255,.4);background:rgba(127,182,255,.06);color:#dce8ff}
+.btn.ghost:hover{border-color:var(--light)}
+.scrollcue{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);font-size:11px;letter-spacing:.2em;color:var(--dim);display:flex;flex-direction:column;align-items:center;gap:6px}
+.scrollcue i{width:6px;height:6px;border-radius:50%;background:var(--light);box-shadow:0 0 12px var(--light);animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(8px);opacity:.4}}
+
+/* sections */
+section{padding:70px 22px;max-width:960px;margin:0 auto;position:relative}
+.sh{margin-bottom:28px;position:relative}
+.sh::before{content:attr(data-n);position:absolute;right:-4px;top:-30px;font-family:var(--display);font-weight:900;font-size:104px;line-height:1;color:rgba(127,182,255,.06);pointer-events:none}
+.sh .no{font-family:var(--display);color:var(--gold);letter-spacing:.3em;font-size:10.5px;display:flex;align-items:center;gap:8px}
+.sh .no::after{content:"";flex:0 0 36px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+.sh h2{font-family:var(--serif);font-size:clamp(25px,6.8vw,35px);font-weight:700;margin-top:6px;line-height:1.3}
+.sh p{color:var(--mute);font-size:14px;margin-top:6px}
+.orn{display:flex;align-items:center;justify-content:center;gap:12px;max-width:960px;margin:0 auto;padding:0 22px;color:rgba(226,194,122,.6);position:relative;z-index:1}
+.orn::before,.orn::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(127,182,255,.45))}
+.orn::after{background:linear-gradient(270deg,transparent,rgba(127,182,255,.45))}
+.orn svg{width:38px;height:38px}
+.panel{border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,rgba(127,182,255,.05),transparent 40%),var(--panel);padding:24px 20px;position:relative;overflow:hidden}
+.frame{position:relative}
+.frame::before,.frame::after{content:"";position:absolute;width:14px;height:14px;border:1px solid rgba(226,194,122,.6);pointer-events:none;z-index:5}
+.frame::before{top:7px;left:7px;border-right:0;border-bottom:0}
+.frame::after{bottom:7px;right:7px;border-left:0;border-top:0}
+
+/* world */
+.lore{display:grid;gap:14px}
+.lcard{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:18px 18px 16px;display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:start}
+.lcard .ic{width:44px;height:44px;border-radius:50%;border:1px solid rgba(226,194,122,.45);display:flex;align-items:center;justify-content:center;color:var(--gold);box-shadow:0 0 18px -6px var(--gold)}
+.lcard .ic svg{width:22px;height:22px}
+.lcard small{font-family:var(--display);letter-spacing:.25em;font-size:10px;color:var(--arc)}
+.lcard h3{font-family:var(--serif);font-size:18.5px;margin:1px 0 4px}
+.lcard p{color:var(--mute);font-size:14px}
+.academy{margin-top:18px;border-radius:16px;overflow:hidden;border:1px solid var(--line)}
+.academy .ph{aspect-ratio:16/9}
+
+/* rank ladder */
+.ladder{margin-top:26px}
+.ladder h3{font-family:var(--serif);font-size:18px;margin-bottom:4px}
+.ladder .s{font-size:12.5px;color:var(--dim);margin-bottom:14px}
+.rung{display:grid;grid-template-columns:46px minmax(0,1fr);align-items:center;gap:12px;padding:9px 0;border-bottom:1px dashed rgba(127,182,255,.14)}
+.rung .r{font-family:var(--display);font-weight:900;font-size:22px;text-align:center;color:var(--rc,#9ca8c8);text-shadow:0 0 14px color-mix(in srgb,var(--rc,#9ca8c8) 60%,transparent)}
+.rung .who{display:flex;gap:8px;flex-wrap:wrap;align-items:center;min-height:40px}
+.rung .who button{display:flex;align-items:center;gap:7px;padding:4px 11px 4px 4px;border-radius:99px;border:1px solid var(--line);background:#0c1226;font-size:13px}
+.rung .who button:hover{border-color:var(--c2)}
+.rung .who .ph{width:32px;height:32px;border-radius:50%}
+.rung .who .ph>span{font-size:0}.rung .who .ph>span svg{display:none}
+.rung .who em{font-style:normal;color:var(--dim);font-size:12.5px}
+.rung.x{border:1px solid rgba(226,194,122,.4);border-radius:14px;padding:12px 10px;margin-bottom:6px;background:radial-gradient(80% 120% at 0% 50%,rgba(226,194,122,.12),transparent 70%)}
+.rung.x .r{font-size:15px;letter-spacing:.05em;color:var(--gold2);animation:glitch 3.2s steps(1) infinite}
+@keyframes glitch{0%,92%{transform:none;opacity:1}93%{transform:translateX(2px);opacity:.6}95%{transform:translateX(-2px)}97%{transform:none;opacity:.8}}
+.rung.x .who{font-family:var(--serif);color:#f3e6c4;font-size:14px}
+
+/* elina feature */
+.feat{display:grid;gap:18px}
+@media(min-width:760px){.feat{grid-template-columns:1fr 1fr;align-items:center}}
+.feat .ph{border-radius:16px;border:1px solid var(--line);aspect-ratio:4/5}
+.feat .tx p{color:#cdd6ee;font-size:15px;margin-bottom:12px;font-family:var(--serif);line-height:1.9}
+.feat .fails{display:flex;gap:5px;flex-wrap:wrap;margin:6px 0 16px}
+.feat .fails i{width:22px;height:22px;border-radius:50%;border:1px solid rgba(255,110,110,.45);display:flex;align-items:center;justify-content:center;font-style:normal;font-size:11px;color:#ff8b8b}
+.feat .fails i.last{border-color:var(--gold);color:var(--gold);box-shadow:0 0 14px -2px var(--gold);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 26px 2px var(--gold)}}
+.feat .lab{font-size:12px;color:var(--dim);letter-spacing:.08em}
+.quote{border-left:2px solid var(--light);padding:6px 0 6px 14px;font-family:var(--serif);color:#e6efff;font-size:15.5px;margin:14px 0}
+.quote small{display:block;font-family:var(--sans);font-size:11px;color:var(--dim);margin-top:4px}
+
+/* roster: contract pairs */
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.chip{font-size:13px;padding:7px 14px;border-radius:99px;border:1px solid var(--line);color:var(--mute);transition:.2s}
+.chip.on{border-color:var(--gold);color:#fff;background:rgba(226,194,122,.14)}
+.pairs{display:grid;gap:16px}
+@media(min-width:760px){.pairs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pair{border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:12px;position:relative}
+.pair .pt{display:flex;justify-content:space-between;align-items:center;padding:2px 4px 10px;font-size:11px;letter-spacing:.2em;font-family:var(--display);color:var(--dim)}
+.pair .pt b{color:var(--gold);font-weight:700}
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;position:relative}
+.duo .seal{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);z-index:6;width:42px;height:42px;border-radius:50%;background:#0b1124;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;color:var(--gold);box-shadow:0 0 20px -4px var(--gold)}
+.duo .seal svg{width:24px;height:24px}
+.card{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:3/4.2;border:1px solid var(--line);text-align:left;transition:transform .25s,border-color .25s,box-shadow .25s;display:block;width:100%}
+.card .ph{position:absolute;inset:0}
+.card .ph>img{transition:transform .5s}
+.card:hover{transform:translateY(-3px);border-color:var(--c);box-shadow:0 14px 30px -14px var(--c)}
+.card:hover .ph>img{transform:scale(1.05)}
+.card .ov{position:absolute;inset:auto 0 0 0;padding:36px 10px 10px;background:linear-gradient(0deg,rgba(6,9,20,.96),rgba(6,9,20,.6) 60%,transparent);z-index:3}
+.card .rk{position:absolute;top:8px;left:8px;z-index:3;font-family:var(--display);font-weight:900;font-size:13px;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(6,9,20,.75);border:1px solid var(--c);color:color-mix(in srgb,var(--c) 70%,#fff)}
+.card .ep{font-size:10.5px;color:color-mix(in srgb,var(--c) 70%,#fff)}
+.card .nm{font-family:var(--serif);font-size:17px;font-weight:700;line-height:1.2}
+.card .rl{font-size:11px;color:var(--mute);margin-top:1px}
+.card.unknown{border-style:dashed;border-color:rgba(226,194,122,.55);background:radial-gradient(70% 50% at 50% 40%,rgba(226,194,122,.18),transparent 70%),#0a0f20;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;text-align:center;padding:12px}
+.card.unknown .q{font-family:var(--display);font-weight:900;font-size:54px;color:var(--gold2);text-shadow:0 0 30px rgba(226,194,122,.7);line-height:1;animation:glitch 2.6s steps(1) infinite}
+.card.unknown p{font-size:12px;color:var(--mute);line-height:1.5}
+.card.unknown b{color:#f3e6c4;font-family:var(--serif);font-size:15px}
+.pair.hide,.card.hide{display:none}
+
+/* relation map */
+.map{border:1px solid var(--line);border-radius:18px;background:radial-gradient(60% 60% at 50% 50%,rgba(127,182,255,.1),transparent 70%),var(--panel);padding:8px}
+.map svg{width:100%;height:auto;display:block;max-width:560px;margin:0 auto}
+.map .edge{stroke-width:1.8;opacity:.6;fill:none;transition:.25s}
+.map .elab{font-size:10px;fill:#dfe6f7;paint-order:stroke;stroke:#0e1428;stroke-width:4px;transition:.25s}
+.map .node{cursor:pointer}
+.map .node text{font-family:var(--serif);font-size:11.5px;fill:#fff;text-anchor:middle;paint-order:stroke;stroke:#0e1428;stroke-width:3px}
+.map.focus .edge,.map.focus .elab{opacity:.08}
+.map.focus .edge.on{opacity:1;stroke-width:2.8}
+.map.focus .elab.on{opacity:1}
+.map.focus .node{opacity:.35}
+.map.focus .node.on{opacity:1}
+.legend{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;font-size:12px;color:var(--mute);padding:8px 0 10px}
+.legend i{display:inline-block;width:16px;height:3px;border-radius:2px;vertical-align:middle;margin-right:5px}
+.maphint{text-align:center;font-size:12px;color:var(--dim);padding-bottom:8px}
+
+/* user types */
+.types{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:22px}
+@media(min-width:760px){.types{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.types .card{aspect-ratio:3/4}
+.types .card .nm{font-size:15px}
+
+/* quiz */
+.qtop{display:flex;justify-content:space-between;font-size:11.5px;color:var(--dim);margin-bottom:8px;font-family:var(--display);letter-spacing:.15em}
+.qprog{height:3px;background:#17203a;border-radius:99px;overflow:hidden;margin-bottom:20px}
+.qprog i{display:block;height:100%;background:linear-gradient(90deg,#4f86e0,var(--gold));transition:width .4s}
+.qq{font-family:var(--serif);font-size:clamp(18px,4.9vw,22px);margin-bottom:16px;line-height:1.55}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02);font-size:14.5px;transition:.18s}
+.opt:hover{border-color:var(--gold);background:rgba(226,194,122,.08)}
+.opt:active{transform:scale(.98)}
+.fade{animation:fade .45s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.start{text-align:center;padding:8px 0}
+.start .big{font-family:var(--display);font-weight:900;font-size:44px;color:var(--gold2);line-height:1;text-shadow:0 0 24px rgba(226,194,122,.6)}
+.start p{color:var(--mute);margin:10px 0 18px;font-size:14px}
+.res{display:grid;gap:18px}
+@media(min-width:640px){.res{grid-template-columns:220px minmax(0,1fr);align-items:start}}
+.res .ph{aspect-ratio:3/4;border-radius:14px;border:1px solid var(--c)}
+.res .lbl{font-size:12px;color:var(--dim);letter-spacing:.1em}
+.res h3{font-family:var(--serif);font-size:27px;line-height:1.2}
+.res h3 small{display:block;font-size:13px;color:color-mix(in srgb,var(--c) 70%,#fff);font-family:var(--sans);margin-bottom:4px}
+.res p{color:#d3dbef;font-size:14.5px;margin-top:10px}
+.res .match{margin-top:12px;font-size:13px;color:var(--mute);border-top:1px dashed var(--line);padding-top:10px}
+.res .match b{color:#fff}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.sm{font-size:13px;padding:9px 14px;border-radius:99px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+.sm:hover{border-color:var(--gold)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#141c36;border:1px solid var(--gold);padding:10px 16px;border-radius:12px;font-size:13.5px;opacity:0;transition:.3s;z-index:220;pointer-events:none;width:max-content;max-width:90vw}
+.toast.on{opacity:1;transform:translateX(-50%)}
+
+/* crystal measure */
+.measure{display:grid;gap:18px;justify-items:center;text-align:center}
+.orb{position:relative;width:min(220px,62vw);aspect-ratio:1;border-radius:50%;cursor:pointer;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:none;
+  background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.55),transparent 22%),radial-gradient(circle at 50% 55%,color-mix(in srgb,var(--oc,#7fb6ff) calc(var(--p,0)*100%),#1c2850),#0a1024 75%);
+  box-shadow:0 0 calc(20px + var(--p,0)*90px) calc(var(--p,0)*16px) color-mix(in srgb,var(--oc,#7fb6ff) 70%,transparent),inset 0 0 40px rgba(127,182,255,.3);border:1px solid rgba(191,227,255,.35);transition:box-shadow .15s}
+.orb::after{content:"";position:absolute;inset:-14px;border-radius:50%;border:1px dashed rgba(226,194,122,.35);animation:spin 24s linear infinite}
+.orb.hold{animation:shake .12s linear infinite}
+@keyframes shake{25%{transform:translate(1px,-1px)}50%{transform:translate(-1px,1px)}75%{transform:translate(1px,1px)}}
+.orb.cracked{background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.4),transparent 22%),radial-gradient(circle,#f6dfa2,#7a5a1a 70%)}
+.orb svg.crk{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:.2s}
+.orb.cracked svg.crk{opacity:1}
+.orb .lb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:12px;letter-spacing:.25em;color:rgba(233,238,251,.75);pointer-events:none}
+.mres{min-height:120px;max-width:440px}
+.mres .rk{font-family:var(--display);font-weight:900;font-size:64px;line-height:1;color:var(--rc);text-shadow:0 0 30px var(--rc)}
+.mres .rk.x{font-size:30px;letter-spacing:.06em}
+.mres p{color:#d3dbef;font-size:14.5px;margin-top:8px;font-family:var(--serif)}
+.mres small{display:block;color:var(--dim);font-size:12.5px;margin-top:6px}
+.mhint{font-size:12.5px;color:var(--dim)}
+
+/* contract */
+.form{display:flex;gap:8px;flex-wrap:wrap}
+.form input{flex:1;min-width:0;background:#090e1e;border:1px solid var(--line);border-radius:999px;padding:12px 16px;color:#fff;font:inherit;font-size:16px;outline:none}
+.form input:focus{border-color:var(--gold)}
+.doc{margin-top:20px;position:relative;padding:26px 22px 22px;border-radius:6px;color:#2a2010;overflow:hidden;
+  background:radial-gradient(120% 80% at 50% 0%,#fbf2da,#efe0b8 60%,#e2cd98);box-shadow:0 24px 60px -20px rgba(226,194,122,.45),inset 0 0 0 1px rgba(120,90,30,.35),inset 0 0 0 7px #f6ead0,inset 0 0 0 8px rgba(150,110,40,.45)}
+.doc::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.25;background:radial-gradient(circle at 20% 30%,rgba(140,100,40,.25),transparent 40%),radial-gradient(circle at 80% 80%,rgba(140,100,40,.2),transparent 40%)}
+.doc .dh{text-align:center;border-bottom:1px solid rgba(120,90,30,.35);padding-bottom:12px;margin-bottom:14px}
+.doc .dh small{font-family:var(--display);letter-spacing:.3em;font-size:10px;color:#7a5a1a}
+.doc .dh h4{font-family:var(--display);font-weight:900;font-size:22px;letter-spacing:.12em;color:#2a2010;margin-top:2px}
+.doc .dh p{font-family:var(--serif);font-size:13px;color:#5c4718}
+.doc dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:7px 14px;font-size:14px}
+.doc dt{font-size:12px;color:#7a5a1a;padding-top:1px}
+.doc dd{font-family:var(--serif);font-weight:700}
+.doc ol{margin:14px 0 6px 18px;font-family:var(--serif);font-size:13.5px;line-height:1.8;color:#3a2c10}
+.doc .sign{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px;position:relative;z-index:1}
+.doc .sign div{border-top:1px solid rgba(120,90,30,.45);padding-top:2px}
+.doc .sign small{font-size:10.5px;color:#7a5a1a}
+.doc .sign b{display:block;font-family:var(--pen);font-size:28px;font-weight:400;line-height:1.1;color:#1f2a6a}
+.doc .stamp{position:absolute;right:16px;bottom:58px;width:86px;height:86px;border-radius:50%;border:2.5px solid #b0302a;color:#b0302a;display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--display);font-weight:700;font-size:10px;letter-spacing:.08em;line-height:1.25;transform:rotate(-14deg) scale(2.2);opacity:0;transition:transform .35s cubic-bezier(.3,1.6,.5,1),opacity .2s;mix-blend-mode:multiply}
+.doc .stamp::before{content:"";position:absolute;inset:5px;border-radius:50%;border:1px solid #b0302a}
+.doc.on .stamp{transform:rotate(-14deg) scale(1);opacity:.85;transition-delay:.5s}
+.empty{color:var(--dim);font-size:13.5px;text-align:center;padding:24px 0 6px}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:80;display:none}
+.modal.on{display:block}
+.modal .scrim{position:absolute;inset:0;background:rgba(0,0,8,.75);backdrop-filter:blur(4px);animation:fi .25s}
+@keyframes fi{from{opacity:0}}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:92svh;overflow-y:auto;overflow-x:hidden;background:var(--bg2);border-radius:18px 18px 0 0;border-top:1px solid var(--c,#7fb6ff);animation:up .35s cubic-bezier(.2,.8,.2,1);overscroll-behavior:contain}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+@media(min-width:760px){.sheet{left:50%;right:auto;bottom:auto;top:50%;transform:translate(-50%,-50%);width:min(860px,94vw);max-height:88vh;border-radius:16px;border:1px solid var(--c);animation:pop .3s}@keyframes pop{from{opacity:0;transform:translate(-50%,-46%)}}}
+.close{position:sticky;top:10px;display:block;margin:10px 10px -46px auto;width:36px;height:36px;border-radius:50%;background:rgba(6,9,20,.78);border:1px solid var(--line);font-size:18px;z-index:6}
+.mhero{display:grid}
+@media(min-width:760px){.mhero{grid-template-columns:330px minmax(0,1fr)}}
+.ph.mimg{display:flex;align-items:center;justify-content:center;min-height:300px;aspect-ratio:auto}
+.ph.mimg>img{position:relative;inset:auto;width:100%;height:auto;max-height:78svh;object-fit:contain;object-position:center}
+.ph.mimg>.bb{display:block}
+.thumbs{display:flex;gap:6px;padding:10px 16px 0;overflow-x:auto;scrollbar-width:none}
+.thumbs::-webkit-scrollbar{display:none}
+.thumbs button{width:52px;height:52px;border-radius:10px;overflow:hidden;flex:none;border:1px solid var(--line);opacity:.6}
+.thumbs button.on{opacity:1;border-color:var(--c)}
+.thumbs .ph{width:100%;height:100%}
+.thumbs .ph>span{font-size:0}.thumbs .ph>span svg{width:50%}
+.mbody{padding:18px 20px 30px}
+.mbody .ep{font-size:12.5px;color:color-mix(in srgb,var(--c) 70%,#fff)}
+.mbody h3{font-family:var(--serif);font-size:30px;line-height:1.15}
+.mbody h3 small{font-family:var(--display);font-size:12px;letter-spacing:.22em;color:var(--dim);margin-left:8px;white-space:nowrap}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.pills span{font-size:12px;padding:4px 10px;border-radius:99px;background:#141b33;border:1px solid var(--line)}
+.kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:14px 0}
+.kv div{background:#0b1124;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.kv small{display:block;font-size:10.5px;color:var(--dim)}
+.kv b{font-family:var(--serif);font-size:16px;color:color-mix(in srgb,var(--c) 55%,#fff)}
+.blk{margin-top:16px}
+.blk h4{font-size:11.5px;letter-spacing:.2em;color:var(--dim);margin-bottom:4px;font-weight:500}
+.blk p{font-size:14.5px;color:#d9e0f2}
+.likes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:16px}
+.likes div{border-radius:12px;padding:10px 12px;font-size:13.5px}
+.likes .y{background:rgba(120,200,150,.07);border:1px solid rgba(120,200,150,.2)}
+.likes .n{background:rgba(255,110,110,.07);border:1px solid rgba(255,110,110,.22)}
+.likes small{display:block;font-size:11px;color:var(--dim);margin-bottom:2px}
+.rel{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.rel button{display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:99px;border:1px solid var(--line);font-size:13px;background:#0b1124}
+.rel button:hover{border-color:var(--c2)}
+.rel .ph{width:28px;height:28px;border-radius:50%}
+.rel .ph>span{font-size:0}.rel .ph>span svg{display:none}
+.rel em{font-style:normal;color:var(--dim);font-size:12px}
+
+footer{padding:60px 22px 80px;text-align:center;color:var(--dim);font-size:12.5px;margin-top:30px}
+footer .lg{font-family:var(--display);font-weight:900;font-size:22px;color:var(--ink);letter-spacing:.1em;margin-bottom:4px}
+footer .lg b{color:var(--gold)}
+footer .lm{font-family:var(--it);font-style:italic;font-size:15px;color:var(--light);margin-bottom:16px}
+footer p{margin:4px 0}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* sound */
+.snd{display:inline-flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.14em;font-family:var(--display);color:rgba(233,238,251,.72);padding:8px 12px;border:1px solid rgba(255,255,255,.14);border-radius:99px;background:rgba(6,9,20,.6)}
+.snd .eq{display:flex;align-items:flex-end;gap:2px;height:12px}
+.snd .eq i{width:2px;height:3px;background:currentColor;border-radius:1px}
+.snd.on{color:var(--gold2);border-color:rgba(226,194,122,.55)}
+.snd.on .eq i{animation:eq 1.1s ease-in-out infinite}
+.snd.on .eq i:nth-child(2){animation-delay:-.3s}.snd.on .eq i:nth-child(3){animation-delay:-.6s}.snd.on .eq i:nth-child(4){animation-delay:-.15s}
+@keyframes eq{0%,100%{height:3px}50%{height:12px}}
+.snd .st::after{content:"OFF"}.snd.on .st::after{content:"ON"}
+#snd{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:55;box-shadow:0 6px 20px rgba(0,0,0,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+
+/* ============ OPENING: the summoning ============ */
+#op{position:fixed;inset:0;z-index:200;background:#03050c;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
+#op.out{animation:opOut 1.4s ease forwards}
+@keyframes opOut{to{opacity:0;filter:blur(6px) brightness(1.8)}}
+#op.gone{display:none}
+#op .L{position:absolute;inset:0}
+#opCv{position:absolute;inset:0;width:100%;height:100%;z-index:6;pointer-events:none}
+#room{z-index:1;opacity:0;transition:opacity 2.5s}
+#room.on{opacity:.38}
+#room img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.7)}
+#room::after{content:"";position:absolute;inset:0;background:radial-gradient(70% 55% at 50% 55%,transparent,rgba(3,5,12,.92))}
+#reveal{z-index:2;opacity:0;transition:opacity 2.6s}
+#reveal.on{opacity:1}
+#reveal .bb{position:absolute;inset:-40px;background:center/cover no-repeat;filter:blur(26px) brightness(.45);display:none}
+#reveal.fit .bb{display:block}
+#reveal img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%}
+#reveal.fit img{object-fit:contain;object-position:center}
+#reveal::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,5,12,.5),rgba(3,5,12,.05) 35%,rgba(3,5,12,.88) 78%)}
+#circle{z-index:4;display:flex;align-items:center;justify-content:center;pointer-events:none}
+#circle svg{width:min(360px,88vw);height:auto;overflow:visible;transition:filter .6s,opacity 1.2s,transform 1.5s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 0 6px rgba(127,182,255,.6))}
+#circle .ln{fill:none;stroke:#8fc0ff;stroke-width:1.2;stroke-dasharray:1;stroke-dashoffset:1}
+#circle.draw .ln{animation:draw 2.4s cubic-bezier(.6,.1,.3,1) forwards}
+#circle.draw .ln:nth-of-type(2n){animation-delay:.35s}
+#circle.draw .ln:nth-of-type(3n){animation-delay:.7s}
+@keyframes draw{to{stroke-dashoffset:0}}
+#circle .rt{font-family:Cinzel;font-size:8.6px;letter-spacing:3px;fill:#a9cfff;opacity:0;transition:opacity 1.5s}
+#circle.draw .rt{opacity:.85;transition-delay:1.6s}
+#circle .rot{transform-origin:150px 150px;animation:spin 40s linear infinite}
+#circle .rot2{transform-origin:150px 150px;animation:spin 26s linear infinite reverse}
+#circle.flicker svg{animation:flick 1.6s steps(1) forwards}
+@keyframes flick{0%{opacity:1}10%{opacity:.3}16%{opacity:.9}24%{opacity:.15}34%{opacity:.7}44%{opacity:.08}60%,100%{opacity:.12}}
+#circle.dead svg{opacity:.12;filter:grayscale(1)}
+#circle.surge svg{opacity:1;filter:drop-shadow(0 0 10px #fff) drop-shadow(0 0 30px #f6dfa2) drop-shadow(0 0 60px #7fb6ff);transform:scale(1.08)}
+#circle.surge .ln{stroke:#fff6dc;stroke-dashoffset:0;animation:none}
+#circle.surge .rt{fill:#fff3cc;opacity:1}
+#circle.surge .rot{animation-duration:3s}
+#circle.surge .rot2{animation-duration:2s}
+#circle.gone svg{opacity:0;transform:scale(1.9)}
+#core{position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px;border-radius:50%;background:#fff;box-shadow:0 0 30px 10px rgba(191,227,255,.8);opacity:0;transition:opacity .6s}
+#circle.draw #core{opacity:.5}
+#circle.dead #core{opacity:0}
+#circle.surge #core{opacity:1;animation:corep .5s ease-in-out infinite alternate}
+@keyframes corep{to{box-shadow:0 0 70px 30px rgba(246,223,162,.95)}}
+#gauge{position:absolute;left:0;right:0;top:calc(50% + min(180px,44vw) + 14px);z-index:9;text-align:center;opacity:0;transition:opacity .4s;pointer-events:none}
+#gauge.on{opacity:1}
+#gauge small{display:block;font-family:var(--display);font-size:10px;letter-spacing:.35em;color:#a9cfff}
+#gauge b{font-family:var(--display);font-weight:900;font-size:40px;color:#fff;text-shadow:0 0 22px #7fb6ff;display:inline-block;min-width:2ch}
+#gauge b.x{color:var(--gold2);text-shadow:0 0 24px var(--gold);font-size:26px;letter-spacing:.04em;animation:glitch .5s steps(1) infinite}
+#flash{z-index:8;background:radial-gradient(circle,#fff,#fff6dc 30%,rgba(127,182,255,.6) 60%,transparent 80%);opacity:0;pointer-events:none}
+#flash.go{animation:flash 1.8s ease forwards}
+@keyframes flash{0%{opacity:0}8%{opacity:1}45%{opacity:.6}100%{opacity:0}}
+#op.shake{animation:shk .5s cubic-bezier(.36,.07,.19,.97)}
+@keyframes shk{10%,90%{transform:translate(-2px,1px)}20%,80%{transform:translate(4px,-2px)}30%,50%,70%{transform:translate(-6px,3px)}40%,60%{transform:translate(6px,-3px)}}
+.ot{position:absolute;left:24px;right:24px;text-align:center;font-family:var(--serif);color:#eef3ff;opacity:0;transition:opacity 1.1s ease;z-index:10;text-shadow:0 0 18px rgba(0,0,0,.95)}
+.ot.on{opacity:1}
+#ot1{top:13%;font-size:clamp(15px,4vw,19px);line-height:1.8}
+#ot1 small{display:block;font-family:var(--display);font-size:10.5px;letter-spacing:.35em;color:var(--gold);margin-bottom:6px}
+#ot2{bottom:13%;font-size:clamp(16px,4.4vw,20px);line-height:1.8}
+#ot2 q{quotes:none;color:#dff0ff;font-style:normal}
+#ot2 .sp{display:block;font-size:11.5px;color:var(--dim);margin-top:4px;font-family:var(--sans)}
+.fcount{position:absolute;top:30%;left:0;right:0;z-index:10;text-align:center;font-family:var(--display);font-size:12px;letter-spacing:.25em;color:#ff8b8b;opacity:0;transition:opacity .6s}
+.fcount.on{opacity:1}
+.fcount b{font-size:22px;letter-spacing:.05em}
+.hint{position:absolute;left:0;right:0;bottom:6%;text-align:center;z-index:12;font-size:12.5px;letter-spacing:.2em;color:var(--gold2);opacity:0;transition:.8s}
+.hint.on{opacity:1;animation:hb 1.6s ease-in-out infinite}
+@keyframes hb{50%{opacity:.35}}
+#final{z-index:12;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:0 24px calc(9vh + env(safe-area-inset-bottom));opacity:0;pointer-events:none;transition:opacity 1.4s}
+#final.on{opacity:1;pointer-events:auto}
+#final .stamp{font-family:var(--display);color:var(--gold2);border:1px solid var(--gold);padding:6px 16px;font-size:11px;letter-spacing:.3em;border-radius:99px;transform:scale(1.8);opacity:0;transition:transform .4s cubic-bezier(.3,1.6,.5,1),opacity .25s;background:rgba(6,9,20,.5)}
+#final.on .stamp{transform:none;opacity:1;transition-delay:.3s}
+#final h2{font-family:var(--display);font-weight:900;font-size:clamp(36px,11vw,84px);line-height:1;margin-top:16px;letter-spacing:.04em;text-shadow:0 0 34px rgba(127,182,255,.7)}
+#final h2 b{color:var(--gold)}
+#final .s{font-family:var(--serif);font-size:16px;margin-top:10px;color:#eef3ff}
+#final .btn{margin-top:22px}
+.skip{position:absolute;top:14px;right:14px;z-index:20;font-size:12.5px;color:rgba(233,238,251,.6);padding:8px 12px;border:1px solid rgba(255,255,255,.14);border-radius:99px}
+#sndOp{position:absolute;top:14px;left:14px;z-index:20}
+#gate{z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(60% 40% at 50% 45%,rgba(43,74,138,.35),transparent 70%),#03050c;transition:opacity 1s}
+#gate.hide{opacity:0;pointer-events:none}
+#gate .g0{font-family:var(--display);letter-spacing:.38em;font-size:10px;color:var(--gold);margin-bottom:10px}
+#gate .g1{font-family:var(--display);font-weight:900;font-size:clamp(30px,9vw,54px);letter-spacing:.06em}
+#gate .g1 b{color:var(--gold)}
+#gate .g2{font-family:var(--serif);color:var(--mute);margin:14px 0 28px;font-size:14.5px;line-height:1.8}
+#gate .gb{display:flex;flex-direction:column;gap:6px;width:min(260px,78vw)}
+#gate .gn{color:var(--dim);font-size:13px;padding:10px}
+#gate .gn:hover{color:#fff}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- ============ OPENING ============ -->
+<div id="op" aria-label="인트로">
+  <div class="L" id="room"></div>
+  <div class="L" id="reveal"></div>
+  <div class="L" id="circle"><svg viewBox="0 0 300 300">
+    <defs><path id="rpath" d="M150,150 m-118,0 a118,118 0 1,1 236,0 a118,118 0 1,1 -236,0"/></defs>
+    <g class="rot">
+      <circle class="ln" pathLength="1" cx="150" cy="150" r="140"/>
+      <circle class="ln" pathLength="1" cx="150" cy="150" r="128"/>
+      <text class="rt"><textPath href="#rpath">VALTERION · CONTRACTUS · VINCULUM FATI · LUX · GLACIES · FLAMMA · VESTIGIUM ·</textPath></text>
+      <circle class="ln" pathLength="1" cx="150" cy="150" r="106"/>
+    </g>
+    <g class="rot2">
+      <polygon class="ln" pathLength="1" points="150,48 238,201 62,201"/>
+      <polygon class="ln" pathLength="1" points="150,252 62,99 238,99"/>
+      <circle class="ln" pathLength="1" cx="150" cy="48" r="9"/><circle class="ln" pathLength="1" cx="238" cy="201" r="9"/><circle class="ln" pathLength="1" cx="62" cy="201" r="9"/>
+      <circle class="ln" pathLength="1" cx="150" cy="252" r="9"/><circle class="ln" pathLength="1" cx="62" cy="99" r="9"/><circle class="ln" pathLength="1" cx="238" cy="99" r="9"/>
+    </g>
+    <circle class="ln" pathLength="1" cx="150" cy="150" r="58"/>
+    <circle class="ln" pathLength="1" cx="150" cy="150" r="30"/>
+  </svg><div id="core"></div></div>
+  <div class="L" id="flash"></div>
+  <canvas id="opCv"></canvas>
+  <div class="ot" id="ot1"></div>
+  <div class="fcount" id="fcount"></div>
+  <div class="ot" id="ot2"></div>
+  <div id="gauge"><small>MANA RANK</small><b id="gv">F</b></div>
+  <div class="hint" id="hint">마법진을 터치해, 부름에 응답한다</div>
+  <div class="L" id="final">
+    <div class="stamp">CONTRACT ESTABLISHED · 계약 성립</div>
+    <h2>CONTRACT <b>:</b> ZERO</h2>
+    <div class="s">F급 사역사가 규격외 사역마를 소환하는 이야기</div>
+    <button class="btn gold" id="enter">발테리온 사역원으로</button>
+  </div>
+  <button class="skip" id="skip">건너뛰기 ›</button>
+  <button class="snd" id="sndOp" aria-label="배경음악 켜기/끄기"><span class="eq"><i></i><i></i><i></i><i></i></span>BGM <span class="st"></span></button>
+  <div class="L" id="gate">
+    <div class="g0">VALTERION SUMMONING RECORD</div>
+    <div class="g1">CONTRACT <b>:</b> ZERO</div>
+    <div class="g2">이 사이트에는 배경음악과 효과음이 있어요.<br>🎧 이어폰을 끼고 들으면 더 좋아요.</div>
+    <div class="gb"><button class="btn gold" id="gOn">♪ 소리 켜고 입장</button><button class="gn" id="gOff">소리 없이 입장</button></div>
+  </div>
+</div>
+
+<canvas id="stars"></canvas>
+<div id="prog"></div>
+<button class="snd" id="snd" aria-label="배경음악 켜기/끄기"><span class="eq"><i></i><i></i><i></i><i></i></span>BGM <span class="st"></span></button>
+
+<nav>
+  <a class="logo" href="#top">CONTRACT <b>:</b> ZERO</a>
+  <button class="burger" id="burger" aria-label="메뉴"><i></i><i></i><i></i></button>
+</nav>
+<div id="menu">
+  <a href="#world"><span class="rn">I</span><span class="kr">세계관 · 등급</span><span class="la">THE CONTRACT</span></a>
+  <a href="#elina"><span class="rn">II</span><span class="kr">마지막 소환</span><span class="la">THE LAST CALL</span></a>
+  <a href="#cast"><span class="rn">III</span><span class="kr">사역원 인물</span><span class="la">ROSTER</span></a>
+  <a href="#bonds"><span class="rn">IV</span><span class="kr">관계도</span><span class="la">BONDS</span></a>
+  <a href="#you"><span class="rn">V</span><span class="kr">나는 어떤 사역마?</span><span class="la">THE ZERO</span></a>
+  <a href="#measure"><span class="rn">VI</span><span class="kr">마력 측정</span><span class="la">MEASURE</span></a>
+  <a href="#contract"><span class="rn">VII</span><span class="kr">계약서 작성</span><span class="la">CONTRACT</span></a>
+  <button class="replay" id="replayOp">↺ 소환 의식 다시 보기</button>
+</div>
+
+<header class="hero" id="top">
+  <div class="bg ph" id="heroBg" data-tol=".5" style="--c:#7fb6ff"><span></span></div>
+  <div class="hcircle" data-circle></div>
+  <div class="hero-in">
+    <div class="kicker">VALTERION ACADEMY OF SUMMONERS</div>
+    <h1>CONTRACT<br><em>:</em> <span class="z">ZERO</span></h1>
+    <div class="sub">F급 사역사가 규격외 사역마를 소환하는 이야기</div>
+    <p class="desc">사역원 최하위, 계약에 몇 번이고 실패한 F급 사역사 엘리나. 퇴학을 앞둔 마지막 소환 의식에서 마법진 너머로 응답한 존재는 — 등급으로는 잴 수 없는 <b>당신</b>이었다.</p>
+    <div class="tags"><span>#사역마</span><span>#판타지</span><span>#다인캐</span><span>#마법학교</span><span>#드래곤</span><span>#수인</span><span>#초능력</span><span>#언리밋</span></div>
+    <div class="meta"><span>제작 <b>⭐_MEI</b></span><span>등장인물 <b>7명</b></span><span>출시 <b>2026.11.18</b></span></div>
+    <div class="cta">
+      <a class="btn gold" href="https://zeta-ai.io/ko/plots/6260a078-4df4-4e32-a4c0-597eca7f4ab5/profile?share_id=rd6u99q38" target="_blank" rel="noopener">✦ 제타에서 계약하기</a>
+      <a class="btn ghost" href="#you">나는 어떤 사역마?</a>
+    </div>
+  </div>
+  <div class="scrollcue">기록을 펼친다<i></i></div>
+</header>
+
+<main>
+<section id="world">
+  <div class="sh reveal" data-n="I"><div class="no">RECORD I · THE CONTRACT</div><h2>사역사와 사역마의 세계</h2><p>계약은 약속이 아니다. 두 존재의 운명을 하나로 엮는 일이다.</p></div>
+  <div class="lore" id="lore"></div>
+  <div class="academy reveal frame"><div class="ph nat" id="acadImg" style="--c:#7fb6ff"><span></span></div></div>
+  <div class="ladder panel reveal">
+    <h3>발테리온 등급표</h3>
+    <p class="s">마법 적성 · 마력량 · 계약한 사역마의 전투력으로 매겨지는 F~S 등급. 이름을 누르면 프로필이 열려요.</p>
+    <div id="ladder"></div>
+  </div>
+</section>
+
+<div class="orn" data-orn></div>
+
+<section id="elina">
+  <div class="sh reveal" data-n="II"><div class="no">RECORD II · THE LAST CALL</div><h2>마지막 소환 의식</h2></div>
+  <div class="feat reveal">
+    <div class="ph frame nat" id="elinaImg" style="--c:#bfe3ff"><span></span></div>
+    <div class="tx">
+      <div class="lab">엘리나 세리브의 계약 기록</div>
+      <div class="fails" id="fails"></div>
+      <p>다른 연수생들이 하나둘 사역마와 계약하는 동안, 엘리나의 마법진은 매번 빛을 잃었다. 빛 속성 적성은 있지만, 손끝에 겨우 작은 빛을 띄우는 것이 그녀의 한계였다.</p>
+      <p>계약력 847년 9월 17일. 발테리온 지하 소환실. 이번이 정말 마지막 — 실패하면 사역원을 떠나야 한다.</p>
+      <div class="quote">사역마는 도구가 아니에요. 함께 걸어갈… 동료예요.<small>※ 캐릭터 설정을 바탕으로 쓴 팬메이드 대사</small></div>
+      <p>떨리는 손으로 마지막 주문을 읊은 그때, 꺼져가던 마법진이 다시 빛나기 시작했다. 그리고 그 너머에서 — 당신이 눈을 떴다.</p>
+      <div class="row"><button class="btn ghost" id="openElina">엘리나 프로필 보기</button></div>
+    </div>
+  </div>
+</section>
+
+<div class="orn" data-orn></div>
+
+<section id="cast">
+  <div class="sh reveal" data-n="III"><div class="no">RECORD III · ROSTER</div><h2>계약으로 이어진 사람들</h2><p>사역사와 사역마는 언제나 한 쌍. 카드를 누르면 상세 프로필이 열려요.</p></div>
+  <div class="filters reveal" id="filters">
+    <button class="chip on" data-f="all">전체</button>
+    <button class="chip" data-f="m">사역사</button>
+    <button class="chip" data-f="f">사역마</button>
+  </div>
+  <div class="pairs" id="pairs"></div>
+</section>
+
+<div class="orn" data-orn></div>
+
+<section id="bonds">
+  <div class="sh reveal" data-n="IV"><div class="no">RECORD IV · BONDS</div><h2>관계도</h2><p>계약, 경쟁, 그리고 아직 이름 붙지 않은 인연.</p></div>
+  <div class="map reveal" id="map">
+    <div class="legend"><span><i style="background:#e2c27a"></i>계약</span><span><i style="background:#ff6a4a"></i>라이벌</span><span><i style="background:#8fd3ff"></i>평가</span><span><i style="background:#f6dfa2;opacity:.6"></i>??? 계약</span></div>
+    <svg id="mapSvg" viewBox="0 0 400 400" role="img" aria-label="관계도"></svg>
+    <div class="maphint">이름을 눌러 관계 확인 · 한 번 더 누르면 프로필</div>
+  </div>
+</section>
+
+<div class="orn" data-orn></div>
+
+<section id="you">
+  <div class="sh reveal" data-n="V"><div class="no">RECORD V · THE ZERO</div><h2>마법진 너머의 당신</h2><p>엘리나가 불러낸 규격외의 사역마. 당신은 어떤 모습으로 응답했을까?</p></div>
+  <div class="types reveal" id="types"></div>
+  <div class="panel reveal frame" id="quiz"></div>
+</section>
+
+<div class="orn" data-orn></div>
+
+<section id="measure">
+  <div class="sh reveal" data-n="VI"><div class="no">RECORD VI · MEASURE</div><h2>마력 측정 수정구</h2><p>발테리온 입학 첫날의 그 측정. 수정구를 길게 누르고 있다가 손을 떼면 등급이 판정돼요.</p></div>
+  <div class="panel reveal measure">
+    <div class="orb" id="orb" role="button" aria-label="수정구를 길게 누르기">
+      <svg class="crk" viewBox="0 0 100 100"><path d="M50 8 L46 30 L56 42 L44 58 L52 74 L47 92 M56 42 L72 38 L84 46 M44 58 L26 60 L16 70 M52 74 L66 80" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/></svg>
+      <div class="lb" id="orbLb">HOLD</div>
+    </div>
+    <div class="mres" id="mres"><div class="mhint">누르고 있는 동안 마력이 흘러 들어가요.<br>너무 오래 누르면… 무슨 일이 생길지도?</div></div>
+  </div>
+</section>
+
+<div class="orn" data-orn></div>
+
+<section id="contract">
+  <div class="sh reveal" data-n="VII"><div class="no">RECORD VII · CONTRACT</div><h2>사역 계약서 작성</h2><p>당신이 사역마로서 불릴 이름을 적어 주세요. 엘리나와의 계약서가 발급됩니다.</p></div>
+  <div class="panel reveal">
+    <form class="form" id="cForm">
+      <input id="cInput" maxlength="12" placeholder="사역마의 이름 (예: 루크, 하랑, 세이…)" autocomplete="off">
+      <button class="btn gold" type="submit">계약서 발급</button>
+    </form>
+    <div id="cOut"><div class="empty">같은 이름은 언제나 같은 계약서가 나와요.</div></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="orn" data-orn style="margin-bottom:28px"></div>
+  <div class="lg">CONTRACT <b>:</b> ZERO</div>
+  <div class="lm">— vinculum fati —</div>
+  <p>원작 플롯 「CONTRACT : ZERO」 · 제작 ⭐_MEI (@Hoshino_mei)</p>
+  <p>모든 캐릭터 이미지의 저작권은 ⭐_MEI에게 있습니다. 무단 저장·도용·재배포를 금지합니다.</p>
+  <p style="margin-top:14px"><a href="https://zeta-ai.io/ko/plots/6260a078-4df4-4e32-a4c0-597eca7f4ab5/profile?share_id=rd6u99q38" target="_blank" rel="noopener">zeta에서 원작 보기 →</a></p>
+</footer>
+
+<div class="modal" id="modal" aria-hidden="true"><div class="scrim" data-close></div><div class="sheet" id="sheet" role="dialog" aria-modal="true"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const PID='6260a078-4df4-4e32-a4c0-597eca7f4ab5';
+const Z='https://image.zeta-ai.io/';
+const Q='?w=1080&q=88&f=webp',Q2='?w=640&q=88&f=webp';
+const IMG={
+  cover:Z+'plot-cover-image/'+PID+'/a5f13445-6160-4933-b5db-caa81633ac77.png'+Q,
+  intro:Z+'plot-intro-image/'+PID+'/9b1b7d30-fc3c-44c6-bf1e-9bedf92cae81.png'+Q,
+  academy:(()=>{const u=Z+'plot-about-image/'+PID+'/c5b85f22-65f9-409b-95a5-3cb24ad8aadb.png';return u+Q+'|'+u+Q2})(),
+  elina:(()=>{const u=Z+'plot-about-image/'+PID+'/0d10a355-4e55-4de2-9caa-814ff0d061a6.png';return u+Q+'|'+u+Q2})()
+};
+const prof=(dir,f,w)=>{const u=Z+'profile-image/'+PID+'/'+dir+'/'+f+'.png';return w==='big'?u+Q+'|'+u+Q2:u+'?w='+(w||640)+'&q=88&f=webp'};
+const GL={
+  m:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="9"/><path d="M12 3l2.6 6.4L21 12l-6.4 2.6L12 21l-2.6-6.4L3 12l6.4-2.6z"/></svg>',
+  f:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 18c2-6 5-9 8-9s6 3 8 9"/><path d="M8 9L6 4l4 3M16 9l2-5-4 3"/><circle cx="10" cy="13" r=".8" fill="currentColor"/><circle cx="14" cy="13" r=".8" fill="currentColor"/></svg>',
+  link:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M9 15l6-6"/><path d="M10.5 6.5l1.8-1.8a4 4 0 015.7 5.7l-1.8 1.8M13.5 17.5l-1.8 1.8a4 4 0 01-5.7-5.7l1.8-1.8"/></svg>'
+};
+const RC={S:'#f6dfa2',A:'#ff8a5a',B:'#7fb6ff',C:'#8fe0c0',D:'#b7a6ff',E:'#a9b3c9',F:'#8d97ad'};
+
+/* ---------- data ---------- */
+const C=[
+ {k:'el',t:'m',n:'엘리나 세리브',en:'ELINA SERIVE',ep:'빛 속성 · F급 사역사',rank:'F',c:'#bfe3ff',sex:'여',age:22,h:158,attr:'빛',role:'발테리온 연수생',partner:'you',
+  look:'허리까지 내려오는 은백색 장발과 푸른 눈. 흰 사역원 제복을 입고, 왼쪽 뺨에는 흰 밴드를 붙이고 있다.',
+  ab:'빛 속성 적성을 지녔지만 마력량이 극히 적어, 작은 빛을 피워내는 것이 한계. 사역마와의 계약에 여러 번 실패해 퇴학 위기에 놓였다.',
+  per:'소심하고 자신감이 없지만 끝까지 포기하지 않는다. 긴장하면 시선을 피하거나 옷자락을 만지작거리고, 당황하면 말을 더듬는다. 사역마를 도구가 아닌 동료로 대한다.',
+  like:'마법 서적, 조용한 곳, 따뜻한 음료, 당신과 보내는 시간',hate:'사람들의 시선, 자신의 무능함, 사역마를 도구처럼 대하는 태도',
+  dir:'2eaf6ac1-b182-4523-aaf9-216a2e258013',im:['a384cef8-75c3-48bb-877e-2c1a641c38f7','906991c5-1a22-4129-9817-8e2396c40f57','35c5c2f7-2390-45dd-9d10-447961a73ee6']},
+ {k:'le',t:'m',n:'레오나 아스트레아',en:'LEONA ASTREA',ep:'빙결 속성 · 사역원 수석',rank:'S',c:'#8fd3ff',sex:'여',age:23,h:174,attr:'빙결',role:'S급 사역사',partner:'as',
+  look:'길게 묶은 금발 포니테일과 황금빛 눈. 흐트러짐 없는 흰 제복 차림.',
+  ab:'빙결 마법을 다루는 사역원 수석. 명문 마법 귀족 가문의 후계자이며, S급 용인족 아스칼론과 계약했다.',
+  per:'자존심이 강한 완벽주의자. 감정 표현이 서툴러 차갑게 보이곤 한다. 엘리나의 성실함은 인정하지만, 사역사로서의 실력은 아직 부족하다고 본다.',
+  dir:'c25ce5d3-3e85-40d5-b924-58fa88315911',im:['4c6fcc92-948d-42e0-9a33-550abe8147e1','494688e2-91f1-4e5a-9e55-3e8475f4bd9a','bc8b9509-d39c-43bb-87b3-3568cb7eb266']},
+ {k:'as',t:'f',n:'아스칼론',en:'ASCALON',ep:'용인족 · 레오나의 사역마',rank:'S',c:'#ff5a6a',sex:'여',h:168,attr:'용인족',role:'S급 사역마',partner:'le',skill:'용린갑주',
+  look:'허리까지 내려오는 백발, 붉은 눈, 검은 뿔. 은백색 갑주에 검은 치마. 전투에 들어서면 비늘과 날개가 드러난다. (인간형 168cm)',
+  ab:'고유 능력 「용린갑주」. 용의 비늘을 갑주처럼 두른다. 이성을 잃으면 거대한 흑룡으로 변한다.',
+  per:'진지하고 과묵하다. 무엇보다 명예와 약속을 중시한다.',
+  dir:'9b18ff6a-e005-4475-8b0b-cf3eb3c50412',im:['55503920-e26d-4ab8-83a3-72ed382a3894','a6f8d044-a736-4f55-82c5-489f67c71cbd','f9f87ef0-6d9d-4f88-ad81-16f868f82324','7a58ae6b-fcc7-4a6b-b34e-0613521d1b0c']},
+ {k:'ca',t:'m',n:'카밀라 로제트',en:'CAMILLA ROSETTE',ep:'화염 속성 · 공격형 사역사',rank:'A',c:'#ff6a4a',sex:'여',age:22,h:170,attr:'화염',role:'A급 사역사',partner:'if',
+  look:'진홍색 단발과 호박색 눈. 제복을 짧게 개조해 입는다.',
+  ab:'화염 마법을 다루는 공격형 사역사. 사역마 이프리트와의 연계 공격이 특기.',
+  per:'호전적이고 직설적이라 강한 상대에게 먼저 도전한다. 레오나에게 여러 번 결투를 신청했지만 아직 이기지 못했다. 평소에는 털털하고 장난기가 많다.',
+  dir:'5c91af46-ba09-4363-a100-7e881176f9b9',im:['24e2e9b4-510d-4393-b24f-6eb4ebc7828c','912817d0-bbec-4e65-8dfd-87f809413703','bb8a8528-831c-4f54-b256-fa68be210733']},
+ {k:'if',t:'f',n:'이프리트',en:'IFRIT',ep:'화염 정령 · 카밀라의 사역마',rank:'A',c:'#ff9a2a',sex:'여',h:172,attr:'화염 정령',role:'A급 사역마',partner:'ca',skill:'홍염',
+  look:'허리까지 내려오는 붉은 머리, 검은 공막에 주황빛 눈동자. 불꽃으로 된 드레스를 두르고 있다.',
+  ab:'고유 능력 「홍염」. 붉은 불꽃을 자유롭게 다룬다.',
+  per:'말을 하지 못해 행동이나 불꽃으로 마음을 표현한다. 감정이 격해지면 머리카락 끝에 불꽃이 피어오른다.',
+  dir:'41ee42d1-1553-4efc-bf56-e1d86b9256bb',im:['ea92f52c-7a38-476e-8add-419af528b5a0','1f661eab-4e61-47eb-adf5-94dded2fdf8a','1c914cf1-b0f7-42f5-aa21-4a74645ad30e']},
+ {k:'ka',t:'m',n:'카인 벨하르트',en:'KAIN BELHARDT',ep:'추적 속성 · 상급 연수생',rank:'B',c:'#7f9cff',sex:'남',age:24,h:176,attr:'추적',role:'B급 사역사',partner:'gr',
+  look:'짧은 남청색 머리, 회색 눈, 나른한 눈매. 늘 주머니에 손을 꽂고 다닌다.',
+  ab:'손끝에서 마력탄을 쏘고, 표식을 남긴 대상을 끝까지 추적한다. 뛰어난 전술 판단력이 진짜 무기.',
+  per:'느긋하고 능글맞지만 중요한 순간엔 누구보다 진지해진다. 등급만으로 사람을 평가하지 않는다.',
+  dir:'86460095-c4a7-44de-b9a7-bf3132c85ea1',im:['562a2abf-c296-4f40-a5a3-7ca10f9d817f','759c101d-ea37-41d4-813c-99cf2f15e907','4fa65584-64d0-4a91-abf7-13985f9f023f']},
+ {k:'gr',t:'f',n:'그람',en:'GRAM',ep:'흑랑족 · 카인의 사역마',rank:'A',c:'#e8b93c',sex:'남',h:191,attr:'흑랑족',role:'A급 사역마',partner:'ka',skill:'흑랑화',
+  look:'검은 장발, 노란 눈, 늑대 귀와 꼬리. 191cm의 근육질 체격에 날카로운 손톱.',
+  ab:'고유 능력 「흑랑화」. 거대한 흑색 웨어울프로 변신한다.',
+  per:'과묵하고 무뚝뚝하다. 하지만 한번 인정한 동료는 쉽게 배신하지 않는다.',
+  dir:'411344d8-d0cb-4783-a381-da8cba3cc996',im:['9d2109af-c74a-4114-95cf-1618ca1de2c7','053c6043-820d-4d14-a32a-d3688201b4c6','e8c658ac-4bdc-4d79-834f-75377dd64534','d8a8a0c5-8748-420a-8f58-b95bbcab64b7','ad1b4aa8-ec78-4623-a078-045c556abe72']}
+];
+const UDIR='ef067a61-33d2-42d8-8922-cc8a7f30b011';
+const U=[
+ {k:'st',n:'사왕족 · 석화',en:'BASILISK · STONE',ep:'바실리스크 계열 · 남성형',c:'#9fe08a',f:'19847986-95fe-4373-8c90-b59afbb2245e',kw:'석화',
+  res:'흔들리지 않는 존재감. 말수는 적지만, 당신이 시선을 들면 상황이 멈춰 선다. 한 번 정한 건 끝까지 지키는 타입 — 겁 많은 사역사에게 가장 단단한 벽이 되어 줄 거예요.',
+  el:'엘리나는 처음엔 당신의 시선을 피하겠지만, 곧 그 고요함에 기대게 될 거예요.'},
+ {k:'po',n:'사왕족 · 맹독',en:'BASILISK · VENOM',ep:'바실리스크 계열 · 여성형',c:'#c58aff',f:'e576c06d-a6f3-4f3e-8265-d03bc71c188d',kw:'맹독',
+  res:'겉은 고요, 속은 치명적. 상대를 천천히 읽고, 결정적인 순간에 한 번에 끝낸다. 여유로운 미소 뒤에 계산이 숨어 있는 타입이에요.',
+  el:'말을 더듬는 엘리나를 놀리는 재미에 빠질지도. 하지만 그녀를 깔보는 사람에겐 누구보다 차가워지죠.'},
+ {k:'ho',n:'월영호족 · 호왕화',en:'MOONTIGER · KING',ep:'월영호족 · 남성형',c:'#7fb6ff',f:'d8429772-2563-42dd-958c-40c9500c6778',kw:'호왕화',
+  res:'정면 돌파형 리더. 본능이 강하고, 지켜야 할 것 앞에서는 맹수가 된다. 자신감 없는 사역사의 등을 가장 크게 밀어주는 타입이에요.',
+  el:'"넌 내가 고른 사역사야." 엘리나가 가장 듣고 싶었던 말을 해줄 수 있는 존재.'},
+ {k:'th',n:'월영호족 · 흑뢰',en:'MOONTIGER · THUNDER',ep:'월영호족 · 여성형',c:'#ffd76a',f:'4024ddc9-b629-45b2-8a97-d068afb5b323',kw:'흑뢰',
+  res:'번개 같은 판단과 행동. 자유롭고 예측 불가, 생각보다 몸이 먼저 움직인다. 지루한 사역원 생활을 단숨에 뒤집어 놓을 타입이에요.',
+  el:'조용한 걸 좋아하는 엘리나는 매일 당신에게 끌려다니겠지만… 어쩐지 웃는 날이 늘어날 거예요.'}
+];
+const BY=Object.fromEntries(C.map(c=>[c.k,c]));U.forEach(u=>BY[u.k]=u);
+const REL=[['le','as','계약','#e2c27a'],['ca','if','계약','#e2c27a'],['ka','gr','계약','#e2c27a'],['el','you','??? 계약','#f6dfa2'],['ca','le','도전 · 연패 중','#ff6a4a'],['le','el','성실함은 인정','#8fd3ff']];
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),1900)}
+async function copy(text){try{await navigator.clipboard.writeText(text);toast('복사했어요 · 붙여넣어 공유해 보세요')}catch(e){toast('복사가 막혀 있어요 — 화면을 캡처해 공유해 주세요')}}
+
+/* ---------- images: fit, fallback, protection ---------- */
+const WM='<b class="wm">© ⭐_MEI · CONTRACT:ZERO</b>';
+function imgTag(url,lazy){const [src,fb]=String(url).split('|');
+  return `<i class="bb"></i><img src="${src}"${fb?` data-fb="${fb}"`:''} alt="" ${lazy?'loading="lazy" ':''}decoding="async" onload="fitImg(this)" onerror="imgErr(this)">`}
+function pic(url,color,label,glyph,cls='',extra=''){
+  const wm=/\b(mimg|nat|wmk)\b/.test(cls)?WM:'';
+  return `<div class="ph ${cls}" style="--c:${color}" ${extra}><span>${glyph?GL[glyph]||'':''}${label||''}</span>${imgTag(url,true)}${wm}</div>`}
+function setPic(el,url,wm){el.insertAdjacentHTML('beforeend',imgTag(url,false)+(wm?WM:''))}
+function imgErr(img){const fb=img.dataset.fb;if(fb){img.removeAttribute('data-fb');img.src=fb}else{const b=img.previousElementSibling;if(b&&b.classList.contains('bb'))b.remove();img.remove()}}
+function fitImg(img){
+  const box=img.parentElement;if(!box||!img.naturalWidth)return;box.classList.add('ok');
+  const bb=box.querySelector(':scope>.bb');
+  if(box.classList.contains('nat')||box.classList.contains('mimg')){if(bb)bb.style.backgroundImage=`url("${img.currentSrc||img.src}")`;return}
+  const w=box.clientWidth,h=box.clientHeight;if(!w||!h)return;
+  const ir=img.naturalWidth/img.naturalHeight,br=w/h,loss=1-Math.min(ir,br)/Math.max(ir,br);
+  const fit=loss>(+box.dataset.tol||.12);box.classList.toggle('fit',fit);
+  if(fit&&bb)bb.style.backgroundImage=`url("${img.currentSrc||img.src}")`;
+}
+function refit(){document.querySelectorAll('.ph>img').forEach(i=>{if(i.complete&&i.naturalWidth)fitImg(i)})}
+addEventListener('resize',()=>{clearTimeout(refit.t);refit.t=setTimeout(refit,200)});
+['contextmenu','dragstart'].forEach(ev=>document.addEventListener(ev,e=>{if(e.target.closest&&e.target.closest('.ph,#op,.map,img'))e.preventDefault()}));
+
+/* ---------- magic circle markup (shared) ---------- */
+const CIRCLE=$('circle').querySelector('svg').outerHTML.replace(/class="ln"/g,'fill="none" stroke="#bfe3ff" stroke-width="1"').replace(/class="rt"/g,'font-family="Cinzel" font-size="8.6" letter-spacing="3" fill="#bfe3ff"').replace('id="rpath"','id="rpath2"').replace('href="#rpath"','href="#rpath2"').replace(/class="rot2?"/g,'');
+document.querySelectorAll('[data-circle]').forEach(e=>e.innerHTML=CIRCLE);
+const ORN='<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="9" stroke-dasharray="2 2"/><path d="M20 4v32M4 20h32" stroke-opacity=".5"/><path d="M20 13l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="currentColor" fill-opacity=".35"/></svg>';
+document.querySelectorAll('[data-orn]').forEach(e=>e.innerHTML=ORN);
+
+/* ======================= SOUND (generated live) ======================= */
+const BGM=(()=>{
+  let ctx=null,mediaEl=null,master,musicBus,sfxBus,on=false,level=0,timer=null,nextT=0,step=0,droneOn=false,nb=null;
+  const hz=m=>440*Math.pow(2,(m-69)/12);
+  function init(){
+    if(ctx)return true;const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return false;
+    try{ctx=new AC()}catch(e){return false}
+    master=ctx.createGain();master.gain.value=0;
+    const comp=ctx.createDynamicsCompressor();comp.threshold.value=-16;comp.ratio.value=4;master.connect(comp);
+    let routed=false;try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch(e){}
+    const iOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+    if(iOS&&!navigator.audioSession&&ctx.createMediaStreamDestination){try{const d=ctx.createMediaStreamDestination();comp.connect(d);mediaEl=document.createElement('audio');mediaEl.setAttribute('playsinline','');mediaEl.srcObject=d.stream;routed=true}catch(e){}}
+    if(!routed)comp.connect(ctx.destination);
+    const rev=ctx.createConvolver();rev.buffer=impulse(3.8,2.2);const rg=ctx.createGain();rg.gain.value=.75;rev.connect(rg);rg.connect(master);
+    musicBus=ctx.createGain();musicBus.gain.value=1.1;musicBus.connect(master);const ms=ctx.createGain();ms.gain.value=.6;musicBus.connect(ms);ms.connect(rev);
+    sfxBus=ctx.createGain();sfxBus.gain.value=.8;sfxBus.connect(master);const ss=ctx.createGain();ss.gain.value=.45;sfxBus.connect(ss);ss.connect(rev);
+    return true;
+  }
+  function impulse(sec,decay){const r=ctx.sampleRate,len=Math.floor(r*sec),b=ctx.createBuffer(2,len,r);for(let c=0;c<2;c++){const d=b.getChannelData(c);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,decay)}return b}
+  function noise(){if(!nb){nb=ctx.createBuffer(1,ctx.sampleRate*2,ctx.sampleRate);const d=nb.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1}const s=ctx.createBufferSource();s.buffer=nb;s.loop=true;return s}
+  function pad(m,t,dur,vol){
+    const out=ctx.createGain();out.gain.setValueAtTime(0,t);out.gain.linearRampToValueAtTime(vol,t+1.8);out.gain.setValueAtTime(vol,t+dur);out.gain.linearRampToValueAtTime(0,t+dur+2.4);
+    const lp=ctx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=2600;lp.connect(out);out.connect(musicBus);
+    [['sawtooth',-6,.5],['sawtooth',6,.5],['triangle',0,.9]].forEach(([ty,dt,v])=>{const o=ctx.createOscillator();o.type=ty;o.frequency.value=hz(m);o.detune.value=dt;const g=ctx.createGain();g.gain.value=v;o.connect(g);g.connect(lp);o.start(t);o.stop(t+dur+2.6)});
+  }
+  function harp(m,t,vol){[[1,'triangle',1],[2,'sine',.3],[3,'sine',.08]].forEach(([r,ty,k])=>{const o=ctx.createOscillator();o.type=ty;o.frequency.value=hz(m)*r;const g=ctx.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol*k,t+.005);g.gain.exponentialRampToValueAtTime(.0001,t+2.2);o.connect(g);g.connect(musicBus);o.start(t);o.stop(t+2.3)})}
+  function bell(m,t,vol,bus){[1,2,2.76,5.4].forEach((r,i)=>{const o=ctx.createOscillator();o.frequency.value=hz(m)*r;const g=ctx.createGain();const v=vol/(1+i);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.004);g.gain.exponentialRampToValueAtTime(.0001,t+5/(1+i*.6));o.connect(g);g.connect(bus||musicBus);o.start(t);o.stop(t+5.2)})}
+  function startDrone(){
+    if(droneOn)return;droneOn=true;const t=ctx.currentTime;
+    const g=ctx.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.3,t+3);g.connect(musicBus);
+    [[hz(50),'sine',.25],[hz(62),'triangle',.55],[hz(69),'triangle',.35],[hz(74),'sine',.3]].forEach(([f,ty,v])=>{const o=ctx.createOscillator();o.type=ty;o.frequency.value=f;const og=ctx.createGain();og.gain.value=v;o.connect(og);og.connect(g);o.start()});
+    const sh=ctx.createGain();sh.gain.value=.12;const lfo=ctx.createOscillator();lfo.frequency.value=.25;const lg=ctx.createGain();lg.gain.value=.08;lfo.connect(lg);lg.connect(sh.gain);lfo.start();
+    [hz(86),hz(93)].forEach(f=>{const o=ctx.createOscillator();o.frequency.value=f;o.connect(sh);o.start()});sh.connect(g);
+  }
+  // D major, hopeful: Dmaj7 – Bm7 – Gmaj7 – A
+  const PROG=[[50,57,61,66],[47,54,57,62],[43,50,54,59],[45,52,57,61]];
+  const ARP=[[62,66,69,73,74,73,69,66],[59,62,66,69,71,69,66,62],[55,59,62,66,67,66,62,59],[57,61,64,69,71,69,64,61]];
+  const MEL=[[78,76,74,73],[74,73,71,69],[71,74,76,78],[76,73,69,73]];
+  const BAR=6.4;
+  function sched(){
+    if(!ctx)return;
+    while(nextT<ctx.currentTime+1.2){
+      const i=step%4,t=nextT;
+      if(level===0){[0,3,5].forEach((k,j)=>harp(ARP[i][k]+12,t+.4+j*1.9,.07))}
+      if(level>=1){PROG[i].forEach(m=>pad(m+12,t,BAR,.045));ARP[i].concat(ARP[i]).forEach((m,k)=>{if(k<2||Math.random()<.85)harp(m+12,t+k*BAR/16,.1)})}
+      if(level>=2){if(i===0)bell(86,t+.02,.1);MEL[i].forEach((m,k)=>{if(k===0||Math.random()<.7)harp(m+12,t+.8+k*1.6,.08)})}
+      nextT+=BAR;step++;
+    }
+  }
+  function ui(){document.querySelectorAll('.snd').forEach(b=>{b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)})}
+  function unlock(){try{const b=ctx.createBuffer(1,1,22050),s=ctx.createBufferSource();s.buffer=b;s.connect(ctx.destination);s.start(0)}catch(e){}if(mediaEl){const p=mediaEl.play();if(p&&p.catch)p.catch(()=>{})}}
+  async function start(){
+    if(!init()){toast('이 브라우저에서는 소리를 낼 수 없어요');return}
+    unlock();try{await ctx.resume()}catch(e){}
+    on=true;const t=ctx.currentTime;master.gain.cancelScheduledValues(t);master.gain.setValueAtTime(master.gain.value,t);master.gain.linearRampToValueAtTime(.95,t+1.6);
+    startDrone();if(!timer){nextT=ctx.currentTime+.1;sched();timer=setInterval(sched,300)}ui();
+  }
+  function stop(){on=false;ui();if(!ctx)return;const t=ctx.currentTime;master.gain.cancelScheduledValues(t);master.gain.setValueAtTime(master.gain.value,t);master.gain.linearRampToValueAtTime(0,t+.8);setTimeout(()=>{if(!on&&ctx){ctx.suspend();if(mediaEl)mediaEl.pause()}},900)}
+  function setLevel(l){const up=l>level;level=l;if(up&&ctx&&on&&l===1){nextT=ctx.currentTime+.05;sched()}}
+  let charge=null;
+  function sfx(name,arg){
+    if(!on||!ctx)return;const t=ctx.currentTime+.01;
+    const G=v=>{const g=ctx.createGain();g.gain.value=v;g.connect(sfxBus);return g};
+    if(name==='hum'){const o=ctx.createOscillator();o.type='sawtooth';o.frequency.setValueAtTime(147,t);o.frequency.exponentialRampToValueAtTime(294,t+2.4);const f=ctx.createBiquadFilter();f.type='lowpass';f.frequency.setValueAtTime(500,t);f.frequency.linearRampToValueAtTime(1800,t+2.4);
+      const g=G(0);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.22,t+1.2);g.gain.linearRampToValueAtTime(0,t+3);o.connect(f);f.connect(g);o.start(t);o.stop(t+3.1);
+      [74,81,86].forEach((m,i)=>bell(m,t+.6+i*.55,.12,sfxBus))}
+    if(name==='fizzle'){const o=ctx.createOscillator();o.type='triangle';o.frequency.setValueAtTime(520,t);o.frequency.exponentialRampToValueAtTime(70,t+1.1);const g=G(0);g.gain.setValueAtTime(.18,t);g.gain.exponentialRampToValueAtTime(.001,t+1.2);o.connect(g);o.start(t);o.stop(t+1.3);
+      const n=noise(),f=ctx.createBiquadFilter();f.type='highpass';f.frequency.value=3000;const g2=G(0);g2.gain.setValueAtTime(.08,t);g2.gain.exponentialRampToValueAtTime(.001,t+.9);n.connect(f);f.connect(g2);n.start(t);n.stop(t+1)}
+    if(name==='tick'){harp(arg||86,t,.06)}
+    if(name==='surge'){const o=ctx.createOscillator();o.type='sawtooth';o.frequency.setValueAtTime(110,t);o.frequency.exponentialRampToValueAtTime(880,t+2.6);const f=ctx.createBiquadFilter();f.type='lowpass';f.frequency.setValueAtTime(300,t);f.frequency.exponentialRampToValueAtTime(5000,t+2.6);
+      const g=G(0);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.2,t+2.4);g.gain.linearRampToValueAtTime(0,t+2.75);o.connect(f);f.connect(g);o.start(t);o.stop(t+2.8);
+      const n=noise(),bf=ctx.createBiquadFilter();bf.type='bandpass';bf.Q.value=1.2;bf.frequency.setValueAtTime(400,t);bf.frequency.exponentialRampToValueAtTime(7000,t+2.6);const g2=G(0);g2.gain.setValueAtTime(0,t);g2.gain.linearRampToValueAtTime(.35,t+2.5);g2.gain.linearRampToValueAtTime(0,t+2.75);n.connect(bf);bf.connect(g2);n.start(t);n.stop(t+2.8)}
+    if(name==='burst'){const o=ctx.createOscillator();o.frequency.setValueAtTime(130,t);o.frequency.exponentialRampToValueAtTime(30,t+.8);const g=G(0);g.gain.setValueAtTime(.9,t);g.gain.exponentialRampToValueAtTime(.001,t+1.5);o.connect(g);o.start(t);o.stop(t+1.6);
+      const n=noise(),f=ctx.createBiquadFilter();f.type='lowpass';f.frequency.value=2500;const g2=G(0);g2.gain.setValueAtTime(.5,t);g2.gain.exponentialRampToValueAtTime(.001,t+.9);n.connect(f);f.connect(g2);n.start(t);n.stop(t+1);
+      [74,78,81,86,90,93,98,102].forEach((m,i)=>harp(m,t+.08+i*.09,.07));bell(62,t+.05,.2,sfxBus)}
+    if(name==='seal'){const o=ctx.createOscillator();o.frequency.setValueAtTime(95,t);o.frequency.exponentialRampToValueAtTime(42,t+.25);const g=G(0);g.gain.setValueAtTime(.7,t);g.gain.exponentialRampToValueAtTime(.001,t+.45);o.connect(g);o.start(t);o.stop(t+.5);bell(74,t+.05,.12,sfxBus)}
+    if(name==='crack'){const n=noise(),f=ctx.createBiquadFilter();f.type='highpass';f.frequency.value=1800;const g=G(0);g.gain.setValueAtTime(.6,t);g.gain.exponentialRampToValueAtTime(.001,t+.35);n.connect(f);f.connect(g);n.start(t);n.stop(t+.4);[3520,4980,6270].forEach((fq,i)=>{const s=ctx.createOscillator();s.frequency.value=fq;const sg=G(0);sg.gain.setValueAtTime(.05,t+i*.04);sg.gain.exponentialRampToValueAtTime(.0001,t+1.2);s.connect(sg);s.start(t+i*.04);s.stop(t+1.3)})}
+  }
+  function chargeStart(){
+    if(!on||!ctx)return;chargeStop();const t=ctx.currentTime;
+    const o=ctx.createOscillator();o.type='triangle';o.frequency.setValueAtTime(180,t);o.frequency.exponentialRampToValueAtTime(1600,t+5);
+    const o2=ctx.createOscillator();o2.type='sine';o2.frequency.setValueAtTime(270,t);o2.frequency.exponentialRampToValueAtTime(2400,t+5);
+    const g=ctx.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.12,t+.3);g.gain.linearRampToValueAtTime(.2,t+5);g.connect(sfxBus);
+    const tr=ctx.createOscillator();tr.frequency.value=9;const tg=ctx.createGain();tg.gain.value=.05;tr.connect(tg);tg.connect(g.gain);
+    o.connect(g);o2.connect(g);o.start(t);o2.start(t);tr.start(t);charge={o,o2,tr,g};
+  }
+  function chargeStop(){if(!charge||!ctx)return;const t=ctx.currentTime,c=charge;charge=null;c.g.gain.cancelScheduledValues(t);c.g.gain.setValueAtTime(c.g.gain.value,t);c.g.gain.linearRampToValueAtTime(0,t+.15);[c.o,c.o2,c.tr].forEach(o=>o.stop(t+.2))}
+  document.addEventListener('visibilitychange',()=>{if(!ctx)return;if(document.hidden){ctx.suspend();if(mediaEl)mediaEl.pause()}else if(on){ctx.resume();if(mediaEl){const p=mediaEl.play();if(p&&p.catch)p.catch(()=>{})}}});
+  return{start,stop,toggle(){on?stop():start()},setLevel,sfx,chargeStart,chargeStop,get on(){return on},_dbg:()=>({ctx,master,mediaEl})};
+})();
+
+/* ======================= OPENING ======================= */
+const op=$('op');
+$('room').innerHTML=`<img src="${IMG.intro}" alt="" onerror="this.remove()">`;
+$('reveal').innerHTML=`<i class="bb" style="background-image:url('${IMG.cover}')"></i><img src="${IMG.cover}" alt="" onload="fitReveal(this)" onerror="this.remove()">`;
+function fitReveal(img){if(!img.naturalWidth)return;const ir=img.naturalWidth/img.naturalHeight,br=innerWidth/innerHeight;$('reveal').classList.toggle('fit',1-Math.min(ir,br)/Math.max(ir,br)>.38)}
+addEventListener('resize',()=>{const i=$('reveal').querySelector('img');if(i)fitReveal(i)});
+
+const cv=$('opCv'),cx=cv.getContext('2d');let OW,OH,PS=[],raf;
+const D=()=>Math.min(devicePixelRatio||1,2);
+function rsz(){OW=cv.width=innerWidth*D();OH=cv.height=innerHeight*D()}rsz();addEventListener('resize',rsz);
+function tick(){cx.clearRect(0,0,OW,OH);cx.globalCompositeOperation='lighter';
+  for(let i=PS.length-1;i>=0;i--){const p=PS[i];
+    if(p.orb){p.a0+=p.w;p.rr+=(p.tr-p.rr)*.04;p.x=OW/2+Math.cos(p.a0)*p.rr;p.y=OH/2+Math.sin(p.a0)*p.rr}
+    else{p.x+=p.vx;p.y+=p.vy;p.vx*=p.f;p.vy=p.vy*p.f+p.g}
+    p.l-=p.d;if(p.l<=0){PS.splice(i,1);continue}
+    const a=Math.min(1,p.l)*p.a;cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fillStyle=`rgba(${p.c},${a})`;cx.shadowBlur=p.r*4;cx.shadowColor=`rgba(${p.c},1)`;cx.fill()}
+  raf=requestAnimationFrame(tick)}
+function motes(n){for(let i=0;i<n;i++)PS.push({x:Math.random()*OW,y:OH*(.4+Math.random()*.6),vx:(Math.random()-.5)*.3*D(),vy:-(Math.random()*.6+.15)*D(),f:1,g:0,r:(Math.random()*1.4+.4)*D(),c:'170,210,255',a:Math.random()*.5+.2,l:2+Math.random()*2,d:.005})}
+function spiral(n){for(let i=0;i<n;i++){const R=Math.max(OW,OH)*.6;PS.push({orb:1,a0:Math.random()*7,w:(.02+Math.random()*.03),rr:R*(.6+Math.random()*.5),tr:Math.random()*30*D(),r:(Math.random()*1.8+.6)*D(),c:Math.random()<.4?'255,236,190':'170,210,255',a:.9,l:2.4+Math.random()*.6,d:.01})}}
+function burst(n){for(let i=0;i<n;i++){const a=Math.random()*7,s=(Math.random()*9+2)*D();PS.push({x:OW/2,y:OH/2,vx:Math.cos(a)*s,vy:Math.sin(a)*s,f:.955,g:.02*D(),r:(Math.random()*2.2+.6)*D(),c:Math.random()<.35?'255,255,255':Math.random()<.5?'246,223,162':'160,205,255',a:1,l:1.4+Math.random()*.8,d:.01})}}
+
+let opRun=0,gated=false;
+function setT(el,html){el.innerHTML=html;el.classList.add('on')}
+function offT(el){el.classList.remove('on')}
+function waitTap(ms){return new Promise(res=>{let d=0;const h=()=>{if(d)return;d=1;op.removeEventListener('pointerdown',h);res()};op.addEventListener('pointerdown',h);setTimeout(h,ms)})}
+function waitGate(){return new Promise(res=>{const done=()=>{gated=true;$('gate').classList.add('hide');res()};$('gOn').onclick=e=>{e.stopPropagation();BGM.start();done()};$('gOff').onclick=e=>{e.stopPropagation();done()}})}
+async function playOpening(){
+  const id=++opRun,alive=()=>id===opRun;
+  op.className='';document.body.classList.add('lock');
+  ['room','reveal','flash','final'].forEach(k=>$(k).className='L');$('circle').className='L';
+  ['ot1','ot2'].forEach(k=>$(k).className='ot');$('fcount').className='fcount';$('hint').className='hint';$('gauge').className='';$('gv').className='';$('gv').textContent='F';
+  PS=[];cancelAnimationFrame(raf);tick();
+  if(!gated){$('gate').classList.remove('hide');await waitGate();if(!alive())return}
+  BGM.setLevel(0);
+  if(RM){finale(true);return}
+  await sleep(600);if(!alive())return;
+  $('room').classList.add('on');motes(40);
+  setT($('ot1'),'<small>CONTRACT YEAR 847 · 9 · 17</small>발테리온 사역원, 지하 소환실.');
+  await sleep(2600);if(!alive())return;
+  // the circle is drawn
+  $('circle').classList.add('draw');BGM.sfx('hum');
+  setT($('ot2'),'떨리는 손으로, 엘리나가 마지막 주문을 읊는다.');
+  await sleep(3400);if(!alive())return;
+  offT($('ot2'));
+  // …and it fails, again
+  $('circle').classList.add('flicker');BGM.sfx('fizzle');
+  await sleep(1700);if(!alive())return;
+  $('circle').classList.add('dead');
+  $('fcount').innerHTML='계약 실패 기록<br><b>× 12</b>';$('fcount').classList.add('on');
+  setT($('ot2'),'이번에도 실패하면 — 이곳을 떠나야 한다.');
+  await sleep(2800);if(!alive())return;
+  offT($('ot2'));$('fcount').classList.remove('on');offT($('ot1'));
+  await sleep(900);if(!alive())return;
+  setT($('ot2'),'<q>“제발… 누구라도 좋아요.<br>제 부름에, 답해 주세요.”</q><span class="sp">— 엘리나 세리브</span>');
+  await sleep(2600);if(!alive())return;
+  $('hint').classList.add('on');
+  await waitTap(7000);if(!alive())return;
+  $('hint').classList.remove('on');offT($('ot2'));
+  // you answer: the circle reignites
+  $('circle').classList.remove('flicker','dead');$('circle').classList.add('draw','surge');
+  BGM.sfx('surge');BGM.setLevel(1);spiral(160);
+  $('gauge').classList.add('on');
+  const R=['F','E','D','C','B','A','S'];
+  for(let i=0;i<R.length;i++){$('gv').textContent=R[i];BGM.sfx('tick',74+i*2);await sleep(300);if(!alive())return}
+  $('gv').textContent='???';$('gv').classList.add('x');await sleep(350);if(!alive())return;
+  $('gv').textContent='측정 불가';
+  await sleep(500);if(!alive())return;
+  // burst
+  op.classList.add('shake');$('flash').classList.add('go');BGM.sfx('burst');burst(260);
+  if(navigator.vibrate)try{navigator.vibrate([20,30,80])}catch(e){}
+  $('circle').classList.add('gone');$('gauge').classList.remove('on');$('room').classList.remove('on');
+  await sleep(350);$('reveal').classList.add('on');
+  await sleep(1400);if(!alive())return;op.classList.remove('shake');
+  setT($('ot1'),'<small>RANK · UNMEASURABLE</small>그날, 규격외의 사역마가 응답했다.');
+  BGM.setLevel(2);
+  await sleep(2800);if(!alive())return;
+  offT($('ot1'));finale();
+}
+function finale(instant){
+  BGM.setLevel(2);$('reveal').classList.add('on');$('circle').classList.add('gone');$('room').classList.remove('on');
+  $('final').classList.add('on');$('hint').classList.remove('on');$('gauge').classList.remove('on');
+  ['ot1','ot2'].forEach(k=>$(k).className='ot');$('fcount').className='fcount';
+  setTimeout(()=>BGM.sfx('seal'),320);
+}
+function exitOpening(){opRun++;op.classList.add('out');setTimeout(()=>{op.classList.add('gone');cancelAnimationFrame(raf);PS=[];document.body.classList.remove('lock')},1300);scrollTo(0,0)}
+['skip','sndOp','gate'].forEach(k=>$(k).addEventListener('pointerdown',e=>e.stopPropagation()));
+$('sndOp').onclick=e=>{e.stopPropagation();BGM.toggle()};
+$('snd').onclick=()=>{BGM.setLevel(2);BGM.toggle()};
+$('skip').onclick=e=>{e.stopPropagation();if($('final').classList.contains('on'))exitOpening();else{opRun++;finale(true)}};
+$('enter').onclick=e=>{e.stopPropagation();exitOpening()};
+$('replayOp').onclick=()=>{document.body.classList.remove('menu-open');op.className='';playOpening()};
+playOpening();
+
+/* ======================= SITE ======================= */
+$('burger').onclick=()=>document.body.classList.toggle('menu-open');
+$('menu').addEventListener('click',e=>{if(e.target.closest('a'))document.body.classList.remove('menu-open')});
+addEventListener('scroll',()=>{const h=document.documentElement;$('prog').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+setPic($('heroBg'),IMG.cover);
+setPic($('acadImg'),IMG.academy,1);
+setPic($('elinaImg'),IMG.elina,1);
+$('openElina').onclick=()=>openChar('el');
+$('fails').innerHTML=Array.from({length:12},()=>'<i>✕</i>').join('')+'<i class="last">13</i>';
+
+/* lore */
+const ICO={
+  pact:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 4h8l3 3v13H7z"/><path d="M15 4v3h3M10 11h5M10 14h5M10 17h3"/></svg>',
+  academy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 9l9-5 9 5-9 5z"/><path d="M7 11v5c2.5 2 7.5 2 10 0v-5M21 9v6"/></svg>',
+  link:GL.link,
+  zero:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><ellipse cx="12" cy="12" rx="6" ry="8"/><path d="M7 18L17 6"/></svg>'
+};
+const LORE=[
+ ['pact','SUMMONER & FAMILIAR','사역사와 사역마','마력을 다루는 인간 마법사 ‘사역사’와, 계약을 통해 그들에게 힘을 빌려주는 존재 ‘사역마’. 두 존재가 함께 살아가는 세계.'],
+ ['academy','VALTERION','발테리온 사역원','사역사를 길러내는 마법 교육기관. 마법 적성과 마력량, 그리고 계약한 사역마의 전투력으로 F급부터 S급까지 등급을 매긴다. 높은 등급은 곧 명예이자 기회다.'],
+ ['link','THE BOND','운명을 엮는 계약','이곳에서 계약은 단순한 약속이 아니다. 사역사와 사역마의 운명을 하나로 엮는 인연 — 그리고 때로는, 사역마가 사역사를 고른다.'],
+ ['zero','CONTRACT : ZERO','경쟁, 협력, 그리고 이해','최하위 F급 사역사와 등급으로 잴 수 없는 사역마. 경쟁과 협력 속에서 서로를 이해해 가는 이야기. 당신이 어떤 사역마가 될지는, 당신이 정한다.']
+];
+$('lore').innerHTML=LORE.map(l=>`<article class="lcard reveal"><div class="ic">${ICO[l[0]]}</div><div><small>${l[1]}</small><h3>${l[2]}</h3><p>${l[3]}</p></div></article>`).join('');
+
+/* rank ladder */
+const avatar=(c,w)=>pic(prof(c.dir||UDIR,c.im?c.im[0]:c.f,w||256),c.c,'','','char','data-tol="9"');
+const LAD=[['S',['le','as']],['A',['ca','if','gr']],['B',['ka']],['C',[]],['D',[]],['E',[]],['F',['el']]];
+$('ladder').innerHTML=`<div class="rung x"><div class="r">???</div><div class="who">측정 불가 · 규격외 — <b style="color:var(--gold2);margin-left:4px">당신</b></div></div>`+
+  LAD.map(([r,ks])=>`<div class="rung" style="--rc:${RC[r]}"><div class="r">${r}</div><div class="who">${ks.length?ks.map(k=>{const c=BY[k];return `<button data-go="${k}" style="--c2:${c.c}">${avatar(c)}${c.n.split(' ')[0]} <em>${c.t==='m'?'사역사':'사역마'}</em></button>`}).join(''):'<em style="color:var(--dim);font-size:12.5px">—</em>'}</div></div>`).join('');
+$('ladder').addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)openChar(b.dataset.go)});
+
+/* roster pairs */
+const PAIRS=[['el','you','엘리나 & ???','F × ???'],['le','as','레오나 & 아스칼론','S × S'],['ca','if','카밀라 & 이프리트','A × A'],['ka','gr','카인 & 그람','B × A']];
+function cardHTML(c){return `<button class="card" data-k="${c.k}" data-t="${c.t}" style="--c:${c.c}">${pic(prof(c.dir,c.im[0],640),c.c,c.en,c.t)}<span class="rk">${c.rank}</span><div class="ov"><div class="ep">${c.ep}</div><div class="nm">${c.n}</div><div class="rl">${c.role}</div></div></button>`}
+$('pairs').innerHTML=PAIRS.map(([a,b,title,rk])=>`<article class="pair reveal"><div class="pt"><span>${title}</span><b>${rk}</b></div><div class="duo">${cardHTML(BY[a])}${b==='you'?`<a class="card unknown" data-t="f" href="#you"><div class="q">?</div><b>당신</b><p>마법진 너머에서<br>응답한 사역마</p></a>`:cardHTML(BY[b])}<div class="seal">${GL.link}</div></div></article>`).join('');
+$('pairs').addEventListener('click',e=>{const b=e.target.closest('button.card');if(b)openChar(b.dataset.k)});
+$('filters').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;
+  document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));const f=b.dataset.f;
+  document.querySelectorAll('.pair .card').forEach(c=>c.classList.toggle('hide',f!=='all'&&c.dataset.t!==f));
+  document.querySelectorAll('.pair .seal').forEach(s=>s.style.display=f==='all'?'':'none');
+  document.querySelectorAll('.duo').forEach(d=>d.style.gridTemplateColumns=f==='all'?'':'minmax(0,1fr)');refit()});
+
+/* relation map */
+(function(){
+  const pos={le:[140,72],as:[262,72],ca:[66,196],if:[66,318],ka:[334,196],gr:[334,318],el:[166,300],you:[236,300]};
+  const r=26;let s=`<defs>${Object.keys(pos).map(k=>`<clipPath id="cp-${k}"><circle cx="${pos[k][0]}" cy="${pos[k][1]}" r="${r}"/></clipPath>`).join('')}</defs>`;
+  REL.forEach(([a,b,l,col])=>{const [x1,y1]=pos[a],[x2,y2]=pos[b];const mx=(x1+x2)/2,my=(y1+y2)/2;
+    const bend=(a==='le'&&b==='el')?-30:0;const qx=mx+bend,qy=my;
+    s+=`<path class="edge" data-a="${a}" data-b="${b}" d="M${x1},${y1} Q${qx},${qy} ${x2},${y2}" stroke="${col}" ${b==='you'?'stroke-dasharray="4 4"':''}/>`;
+    const lx=(x1+x2)/4+qx/2,ly=(y1+y2)/4+qy/2;const dy=(Math.abs(y1-y2)<10)?-8:0;const dx=(Math.abs(x1-x2)<10)?0:0;
+    s+=`<text class="elab" data-a="${a}" data-b="${b}" x="${lx+dx}" y="${ly+dy+(dy?0:3)}" text-anchor="middle">${l}</text>`});
+  Object.entries(pos).forEach(([k,[x,y]])=>{
+    if(k==='you'){s+=`<g class="node" data-k="you"><circle cx="${x}" cy="${y}" r="${r+3}" fill="none" stroke="#f6dfa2" stroke-dasharray="3 3"/><circle cx="${x}" cy="${y}" r="${r}" fill="rgba(226,194,122,.15)"/><text x="${x}" y="${y+7}" style="font-family:Cinzel;font-size:20px;fill:#f6dfa2">?</text><text x="${x}" y="${y+r+16}">당신</text></g>`;return}
+    const c=BY[k];s+=`<g class="node" data-k="${k}"><circle cx="${x}" cy="${y}" r="${r+3}" fill="none" stroke="${c.c}" stroke-width="1.5"/><circle cx="${x}" cy="${y}" r="${r}" fill="${c.c}" opacity=".3"/><text x="${x}" y="${y+4}" style="font-family:Cinzel;font-size:9px">${c.en.slice(0,3)}</text><image data-src="${prof(c.dir,c.im[0],384)}" x="${x-r}" y="${y-r}" width="${r*2}" height="${r*2}" preserveAspectRatio="xMidYMin slice" clip-path="url(#cp-${k})"/><text x="${x}" y="${y+r+16}">${c.n.split(' ')[0]}</text></g>`});
+  const svg=$('mapSvg');svg.innerHTML=s;
+  svg.querySelectorAll('image[data-src]').forEach(im=>{const t=new Image();t.onload=()=>im.setAttribute('href',t.src);t.src=im.dataset.src});
+  const map=$('map');let cur=null;
+  svg.addEventListener('click',e=>{const g=e.target.closest('.node');if(!g){map.classList.remove('focus');cur=null;return}
+    const k=g.dataset.k;if(cur===k){k==='you'?location.hash='#you':openChar(k);return}
+    cur=k;map.classList.add('focus');const linked=new Set([k]);
+    svg.querySelectorAll('.edge,.elab').forEach(el=>{const on=el.dataset.a===k||el.dataset.b===k;el.classList.toggle('on',on);if(on){linked.add(el.dataset.a);linked.add(el.dataset.b)}});
+    svg.querySelectorAll('.node').forEach(n=>n.classList.toggle('on',linked.has(n.dataset.k)))});
+})();
+
+/* modal */
+const modal=$('modal'),sheet=$('sheet');
+function openChar(k){
+  const c=BY[k];if(!c)return;sheet.style.setProperty('--c',c.c);
+  const isU=!c.dir;const dir=isU?UDIR:c.dir;const ims=isU?[c.f]:c.im;
+  const partner=c.partner&&c.partner!=='you'?BY[c.partner]:null;
+  const rels=REL.filter(r=>(r[0]===k||r[1]===k)&&r[0]!=='you'&&r[1]!=='you').map(r=>({o:r[0]===k?r[1]:r[0],l:r[2]}));
+  sheet.innerHTML=`<button class="close" data-close aria-label="닫기">✕</button>
+   <div class="mhero"><div>
+     ${pic(prof(dir,ims[0],'big'),c.c,c.en,c.t||'f','mimg frame char','id="mimg"')}
+     ${ims.length>1?`<div class="thumbs">${ims.map((f,i)=>`<button data-big="${prof(dir,f,'big')}" class="${i?'':'on'}">${pic(prof(dir,f,384),c.c,'',c.t,'char','data-tol="9"')}</button>`).join('')}</div>`:''}
+   </div><div class="mbody">
+     <div class="ep">${c.ep}</div><h3>${c.n}<small>${c.en}</small></h3>
+     ${isU?`<p style="color:var(--mute);font-size:14px;margin-top:10px">플롯에서 고를 수 있는 유저(사역마) 외형 예시예요. 계열은 「${c.kw}」.</p>
+       <div class="row"><a class="btn ghost" href="#you" data-close>적성 테스트 하러 가기</a></div>`:`
+     <div class="pills">${[c.role,c.sex+'성',c.age?c.age+'세':'',c.h?c.h+'cm':''].filter(Boolean).map(x=>`<span>${x}</span>`).join('')}</div>
+     <div class="kv"><div><small>등급</small><b>${c.rank}급</b></div><div><small>${c.t==='m'?'속성':'종족'}</small><b>${c.attr}</b></div>
+       ${c.skill?`<div><small>고유 능력</small><b>「${c.skill}」</b></div>`:''}
+       <div><small>${c.t==='m'?'계약 사역마':'계약 사역사'}</small><b>${c.partner==='you'?'??? (당신)':partner?partner.n.split(' ')[0]:'-'}</b></div></div>
+     <div class="blk"><h4>외모</h4><p>${c.look}</p></div>
+     <div class="blk"><h4>${c.t==='m'?'마법 · 능력':'능력'}</h4><p>${c.ab}</p></div>
+     <div class="blk"><h4>성격</h4><p>${c.per}</p></div>
+     ${c.like?`<div class="likes"><div class="y"><small>♡ 좋아하는 것</small>${c.like}</div><div class="n"><small>✕ 싫어하는 것</small>${c.hate}</div></div>`:''}
+     ${rels.length?`<div class="blk"><h4>관계</h4><div class="rel">${rels.map(r=>{const o=BY[r.o];return `<button data-go="${o.k}" style="--c2:${o.c}">${avatar(o)}${o.n.split(' ')[0]} <em>${r.l}</em></button>`}).join('')}</div></div>`:''}`}
+   </div></div>`;
+  modal.classList.add('on');modal.setAttribute('aria-hidden','false');document.body.classList.add('lock');sheet.scrollTop=0;
+}
+function closeModal(){modal.classList.remove('on');modal.setAttribute('aria-hidden','true');document.body.classList.remove('lock')}
+modal.addEventListener('click',e=>{
+  if(e.target.closest('[data-close]'))return closeModal();
+  const t=e.target.closest('.thumbs button');
+  if(t){const mi=$('mimg');sheet.querySelectorAll('.thumbs button').forEach(b=>b.classList.toggle('on',b===t));
+    const [src,fb]=t.dataset.big.split('|');const m=mi.querySelector(':scope>img');if(m){m.dataset.fb=fb;m.src=src}else setPic(mi,t.dataset.big);return}
+  const g=e.target.closest('[data-go]');if(g)openChar(g.dataset.go)});
+addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();document.body.classList.remove('menu-open')}});
+
+/* user types */
+$('types').innerHTML=U.map(u=>`<button class="card" data-k="${u.k}" style="--c:${u.c}">${pic(prof(UDIR,u.f,640),u.c,u.en,'f','char')}<div class="ov"><div class="ep">${u.ep}</div><div class="nm">${u.n}</div></div></button>`).join('');
+$('types').addEventListener('click',e=>{const b=e.target.closest('.card');if(b)openChar(b.dataset.k)});
+
+/* quiz */
+const QZ=[
+ ['소환진의 빛이 걷히고, 떨고 있는 F급 사역사가 보인다. 당신의 첫마디는?',[['“…네가 날 부른 건가.” 조용히 내려다본다','st'],['“흐응, 재밌는 아이네.” 천천히 다가간다','po'],['“겁먹지 마. 이제 내가 있어.”','ho'],['“드디어 바깥이다!” 일단 기지개부터','th']]],
+ ['사역원 수석이 차가운 눈으로 당신을 평가한다.',[['말없이 시선으로 맞받는다','st'],['미소 지으며 약점부터 찾는다','po'],['정면으로 한 걸음 다가선다','ho'],['상대가 말을 끝내기도 전에 움직인다','th']]],
+ ['엘리나가 “저 같은 게 사역사라니…” 하며 고개를 숙인다.',[['말없이 곁에 서 있는다','st'],['그녀를 깔본 사람부터 조용히 기억해 둔다','po'],['어깨를 두드리며 “넌 내가 고른 사역사야.”','ho'],['기분 전환하자며 손을 잡고 끌고 나간다','th']]],
+ ['임무 없는 휴일, 당신이 있는 곳은?',[['햇볕 드는 바위 위에서 낮잠','st'],['사역원 도서관의 가장 구석 자리','po'],['훈련장에서 몸 풀기','ho'],['사역원 지붕 위','th']]],
+ ['결투장에 섰다. 당신의 전투 방식은?',[['상대의 움직임부터 멈춰 세운다','st'],['서서히, 확실하게 무너뜨린다','po'],['압도적인 힘으로 정면 돌파','ho'],['누구보다 먼저, 누구보다 빠르게','th']]],
+ ['사람들이 당신을 보고 하는 말은?',[['“무서울 만큼 침착해.”','st'],['“속을 전혀 모르겠어.”','po'],['“옆에 있으면 든든해.”','ho'],['“도무지 종잡을 수가 없어.”','th']]]
+];
+const quiz=$('quiz');let qi=0,score={};
+function quizStart(){quiz.innerHTML=`<div class="start fade"><div class="big">?</div><p>마법진 너머의 당신은 어떤 사역마일까?<br>6개의 질문에 직감대로 답해 주세요.</p><button class="btn gold" id="qgo">테스트 시작</button></div>`;
+  $('qgo').onclick=()=>{qi=0;score={st:0,po:0,ho:0,th:0};quizQ()}}
+function quizQ(){const [q,opts]=QZ[qi];
+  quiz.innerHTML=`<div class="fade"><div class="qtop"><span>QUESTION ${qi+1}</span><span>${qi+1} / ${QZ.length}</span></div><div class="qprog"><i style="width:${qi/QZ.length*100}%"></i></div><div class="qq">${q}</div><div class="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${o[0]}</button>`).join('')}</div></div>`;
+  quiz.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{score[opts[b.dataset.i][1]]++;BGM.sfx('tick',78+qi*2);qi++;qi<QZ.length?quizQ():quizRes()})}
+function quizRes(){
+  const r=Object.entries(score).sort((a,b)=>b[1]-a[1]||Math.random()-.5);const u=BY[r[0][0]],s=BY[r[1][0]];
+  quiz.innerHTML=`<div class="res fade" style="--c:${u.c}">${pic(prof(UDIR,u.f,1080),u.c,u.en,'f','frame char wmk')}
+    <div><div class="lbl">당신은 이런 사역마로 응답했다</div><h3><small>${u.ep}</small>${u.n}</h3><p>${u.res}</p>
+     <div class="match">✦ 엘리나와의 계약 궁합 — ${u.el}<br><br>두 번째로 가까운 모습 · <b>${s.n}</b></div>
+     <div class="row"><button class="sm" id="qcopy">결과 복사</button><button class="sm" id="qre">↺ 다시 하기</button><a class="sm" href="#contract" style="text-decoration:none">계약서 쓰러 가기 →</a></div></div></div>`;
+  $('qre').onclick=quizStart;
+  $('qcopy').onclick=()=>copy(`[CONTRACT : ZERO 사역마 적성 테스트]\n나는 「${u.n}」으로 응답했다!\n${u.res}`);
+}
+quizStart();
+
+/* crystal measure */
+(function(){
+  const orb=$('orb'),lb=$('orbLb'),out=$('mres');let t0=0,raf2=0,holding=false;
+  const COL=['#8d97ad','#a9b3c9','#b7a6ff','#8fe0c0','#7fb6ff','#ff8a5a','#f6dfa2'];
+  const TXT={F:['작은 빛 하나. 하지만 엘리나도 여기서 시작했다.','el'],E:['겨우 마법진이 반응하는 수준. 꾸준함이 무기가 될 거예요.',null],D:['기초는 탄탄. 하급 사역마와의 계약이 보인다.',null],C:['평균적인 연수생. 노력하기에 따라 어디까지든.',null],B:['상급 연수생 수준. 카인처럼 머리를 쓰면 더 위로.','ka'],A:['공격형 사역사의 재능. 카밀라가 결투를 신청할지도?','ca'],S:['수석급 마력. 레오나가 당신을 주목하기 시작했다.','le']};
+  function loop(){const d=(performance.now()-t0)/1000;const p=Math.min(1,d/4.6);orb.style.setProperty('--p',p.toFixed(3));orb.style.setProperty('--oc',COL[Math.min(6,Math.floor(p*7))]);
+    if(d>5.6){release(true);return}raf2=requestAnimationFrame(loop)}
+  function press(e){e.preventDefault();if(holding)return;holding=true;orb.classList.remove('cracked');orb.classList.add('hold');lb.textContent='CHARGING';out.innerHTML='<div class="mhint">마력이 흘러 들어간다…</div>';t0=performance.now();BGM.chargeStart();loop()}
+  function release(forced){if(!holding)return;holding=false;cancelAnimationFrame(raf2);orb.classList.remove('hold');BGM.chargeStop();
+    const d=(performance.now()-t0)/1000;lb.textContent='HOLD';
+    if(d<.35){orb.style.setProperty('--p',0);out.innerHTML='<div class="mhint">너무 짧아요. 길게 눌러 마력을 흘려보내세요.</div>';return}
+    const j=d+(Math.random()-.5)*.7;
+    if(forced||j>=4.7){orb.classList.add('cracked');BGM.sfx('crack');
+      if(Math.random()<.7){out.innerHTML=`<div class="rk x" style="--rc:#f6dfa2">측정 불가 · 규격외</div><p>수정구가 감당하지 못했다. 당신은 사역사가 아니라 — 불려 나온 쪽일지도.</p><small>※ 측정 기록이 남지 않았습니다</small>`}
+      else{out.innerHTML=`<div class="rk x" style="--rc:#ff8b8b">과부하</div><p>쩍— 수정구에 금이 갔다. 사역원 관리인이 이쪽을 노려본다.</p><small>다시 측정해 보세요</small>`}
+      setTimeout(()=>{orb.style.setProperty('--p',0)},1200);return}
+    const R=['F','E','D','C','B','A','S'];const rk=R[Math.max(0,Math.min(6,Math.floor(j/4.7*7)))];
+    const [txt,who]=TXT[rk];BGM.sfx('tick',70+R.indexOf(rk)*3);
+    out.innerHTML=`<div class="rk" style="--rc:${RC[rk]}">${rk}</div><p>${txt}</p>${who?`<small>같은 등급 · <a href="#" data-go="${who}" style="color:var(--gold2)">${BY[who].n}</a></small>`:''}`;
+    setTimeout(()=>{orb.style.setProperty('--p',0)},900)}
+  orb.addEventListener('pointerdown',press);
+  ['pointerup','pointercancel','pointerleave'].forEach(ev=>orb.addEventListener(ev,()=>release(false)));
+  orb.addEventListener('contextmenu',e=>e.preventDefault());
+  out.addEventListener('click',e=>{const a=e.target.closest('[data-go]');if(a){e.preventDefault();openChar(a.dataset.go)}});
+})();
+
+/* contract */
+function hash(str){let h=2166136261;for(const ch of str){h^=ch.codePointAt(0);h=Math.imul(h,16777619)}return h>>>0}
+function rng(seed){return()=>{seed=Math.imul(seed^seed>>>15,seed|1);seed^=seed+Math.imul(seed^seed>>>7,seed|61);return((seed^seed>>>14)>>>0)/4294967296}}
+const SPEC=[['사왕족 · 석화',['석안','정지의 눈','회색 영원']],['사왕족 · 맹독',['사독','독아','비취 송곳니']],['월영호족 · 호왕화',['호왕화','월광포효','백야의 발톱']],['월영호족 · 흑뢰',['흑뢰','흑뢰섬','뇌명']],['??? · 미확인 종족',['영(零)','무명','공백의 날개']]];
+const CLAUSE=['사역마는 사역사를 ‘주인’이 아닌 ‘파트너’라 부른다.','사역사는 하루 한 번, 따뜻한 음료를 사역마와 나눈다.','사역마는 사역사가 말을 더듬어도 끝까지 기다린다.','레오나 아스트레아 앞에서 기죽지 않는다.','카밀라 로제트의 결투 신청은 하루 한 번만 받는다.','사역마는 사역사의 등급을 탓하지 않는다. 사역사도 스스로를 탓하지 않는다.','서로의 이름을 부르는 것으로, 계약은 매일 갱신된다.','계약 파기는 쌍방 합의로만 가능하다 — 단, 그런 날은 오지 않는다.','사역마를 도구로 대하는 자에게는 함께 맞선다.'];
+$('cForm').addEventListener('submit',e=>{
+  e.preventDefault();const name=$('cInput').value.trim();if(!name){toast('사역마의 이름을 적어 주세요');return}$('cInput').blur();
+  const r=rng(hash(name+'#ZERO'));const pick=a=>a[Math.floor(r()*a.length)];
+  const sp=pick(SPEC);const sk=pick(sp[1]);const no='VAL-847-'+String(Math.floor(r()*9000)+1000);
+  const cl=[...CLAUSE].sort(()=>r()-.5).slice(0,3);const broke=Math.floor(r()*7)+1;
+  $('cOut').innerHTML=`<div class="doc fade" id="doc">
+    <div class="dh"><small>VALTERION ACADEMY · CONTRACT ${no}</small><h4>CONTRACTUS</h4><p>사역 계약서</p></div>
+    <dl><dt>사역사</dt><dd>엘리나 세리브 (F급 · 빛)</dd>
+      <dt>사역마</dt><dd>${esc(name)}</dd>
+      <dt>종족</dt><dd>${sp[0]}</dd>
+      <dt>판정 등급</dt><dd>측정 불가 (규격외)</dd>
+      <dt>고유 능력</dt><dd>「${sk}」</dd>
+      <dt>비고</dt><dd>측정 중 수정구 파손 ${broke}회</dd>
+      <dt>체결일</dt><dd>계약력 847년 9월 17일</dd></dl>
+    <ol>${cl.map(c=>`<li>${c}</li>`).join('')}</ol>
+    <div class="sign"><div><small>사역사 서명</small><b>Elina Serive</b></div><div><small>사역마 서명</small><b>${esc(name)}</b></div></div>
+    <div class="stamp">VALTERION<br>✦<br>APPROVED</div></div>
+    <div class="row"><button class="sm" id="ccopy">계약서 복사</button><button class="sm" id="cel">엘리나 프로필</button></div>`;
+  requestAnimationFrame(()=>$('doc').classList.add('on'));setTimeout(()=>BGM.sfx('seal'),520);
+  $('ccopy').onclick=()=>copy(`[CONTRACT : ZERO · 사역 계약서 ${no}]\n사역사: 엘리나 세리브 (F급)\n사역마: ${name} — ${sp[0]}\n판정 등급: 측정 불가 (규격외) / 고유 능력 「${sk}」\n${cl.map((c,i)=>`${i+1}. ${c}`).join('\n')}`);
+  $('cel').onclick=()=>openChar('el');
+});
+
+/* reveal */
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* starfield */
+(function(){if(RM)return;const c=$('stars'),x=c.getContext('2d');let W,H,S=[];
+  function rs(){const d=Math.min(devicePixelRatio||1,2);W=c.width=innerWidth*d;H=c.height=innerHeight*d;S=Array.from({length:70},()=>({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*1.2+.3)*d,p:Math.random()*7,s:.01+Math.random()*.02,gold:Math.random()<.18,v:(Math.random()*.15+.03)*d}))}
+  rs();addEventListener('resize',rs);
+  (function loop(){x.clearRect(0,0,W,H);for(const s of S){s.p+=s.s;s.y-=s.v;if(s.y<-5){s.y=H+5;s.x=Math.random()*W}
+    const a=.25+Math.sin(s.p)*.25+.2;x.beginPath();x.arc(s.x,s.y,s.r,0,7);x.fillStyle=s.gold?`rgba(246,223,162,${a})`:`rgba(191,227,255,${a})`;x.shadowBlur=6;x.shadowColor=s.gold?'#f6dfa2':'#bfe3ff';x.fill()}
+    requestAnimationFrame(loop)})()})();
+</script>
+</body>
+</html>
