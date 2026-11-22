@@ -583,6 +583,7 @@ footer p{margin:4px 0}
   <a href="#arena"><span class="rn">VII</span><span class="kr">사역원 결투장</span><span class="la">ARENA</span></a>
   <a href="#measure"><span class="rn">VIII</span><span class="kr">마력 측정</span><span class="la">MEASURE</span></a>
   <a href="#contract"><span class="rn">IX</span><span class="kr">계약서 작성</span><span class="la">CONTRACT</span></a>
+  <a href="./game.html"><span class="rn">✦</span><span class="kr">F급 탈출 프로젝트</span><span class="la">GAME</span></a>
   <button class="replay" id="replayOp">↺ 소환 의식 다시 보기</button>
 </div>
 
@@ -598,7 +599,7 @@ footer p{margin:4px 0}
     <div class="meta"><span>제작 <b>⭐_MEI</b></span><span>등장인물 <b>7명</b></span><span>출시 <b>2026.11.18</b></span></div>
     <div class="cta">
       <a class="btn gold" href="https://zeta-ai.io/ko/plots/6260a078-4df4-4e32-a4c0-597eca7f4ab5/profile?share_id=rd6u99q38" target="_blank" rel="noopener">✦ 제타에서 계약하기</a>
-      <a class="btn ghost" href="#you">나는 어떤 사역마?</a>
+      <a class="btn ghost" href="./game.html">🎮 30일 육성 게임</a>
     </div>
   </div>
   <div class="scrollcue">기록을 펼친다<i></i></div>
@@ -685,6 +686,8 @@ footer p{margin:4px 0}
 <section id="arena">
   <div class="sh reveal" data-n="VII"><div class="no">RECORD VII · ARENA</div><h2>사역원 결투장</h2><p>당신의 사역마 계열을 고르고, 사역원의 강자들에게 도전하세요. 엘리나가 뒤에서 빛으로 지원해 줘요.</p></div>
   <div class="panel reveal" id="arenaBox"></div>
+  <a class="panel reveal" href="./game.html" style="display:flex;align-items:center;gap:14px;margin-top:14px;text-decoration:none;border-color:rgba(226,194,122,.55)">
+    <span style="font-size:30px">🎮</span><span><b style="font-family:var(--serif);font-size:16px;color:var(--gold2)">F급 탈출 프로젝트 · 30일 육성 게임</b><br><span style="font-size:13px;color:var(--mute)">사역마가 되어 엘리나를 30일 뒤 재평가 시험에 합격시켜라! 픽셀 미니게임 · 엔딩 11종 →</span></span></a>
   <p class="fan">※ 기술 수치와 대사는 이 사이트를 위해 만든 팬메이드 설정이에요.</p>
 </section>
 
@@ -786,16 +789,16 @@ const C=[
 ];
 const UDIR='ef067a61-33d2-42d8-8922-cc8a7f30b011';
 const U=[
- {k:'st',n:'사왕족 · 석화',en:'BASILISK · STONE',ep:'바실리스크 계열 · 남성형',c:'#9fe08a',f:'19847986-95fe-4373-8c90-b59afbb2245e',kw:'석화',
+ {k:'st',n:'세르칸',en:'SERKAN',ep:'사왕족 · 석화',c:'#9fe08a',f:'19847986-95fe-4373-8c90-b59afbb2245e',kw:'석화',
   res:'흔들리지 않는 존재감. 말수는 적지만, 당신이 시선을 들면 상황이 멈춰 선다. 한 번 정한 건 끝까지 지키는 타입 — 겁 많은 사역사에게 가장 단단한 벽이 되어 줄 거예요.',
   el:'엘리나는 처음엔 당신의 시선을 피하겠지만, 곧 그 고요함에 기대게 될 거예요.'},
- {k:'po',n:'사왕족 · 맹독',en:'BASILISK · VENOM',ep:'바실리스크 계열 · 여성형',c:'#c58aff',f:'e576c06d-a6f3-4f3e-8265-d03bc71c188d',kw:'맹독',
+ {k:'po',n:'벨시라',en:'BELSIRA',ep:'사왕족 · 맹독',c:'#c58aff',f:'e576c06d-a6f3-4f3e-8265-d03bc71c188d',kw:'맹독',
   res:'겉은 고요, 속은 치명적. 상대를 천천히 읽고, 결정적인 순간에 한 번에 끝낸다. 여유로운 미소 뒤에 계산이 숨어 있는 타입이에요.',
   el:'말을 더듬는 엘리나를 놀리는 재미에 빠질지도. 하지만 그녀를 깔보는 사람에겐 누구보다 차가워지죠.'},
- {k:'ho',n:'월영호족 · 호왕화',en:'MOONTIGER · KING',ep:'월영호족 · 남성형',c:'#7fb6ff',f:'d8429772-2563-42dd-958c-40c9500c6778',kw:'호왕화',
+ {k:'ho',n:'라그하르',en:'RAGHAR',ep:'월영호족 · 호왕화',c:'#7fb6ff',f:'d8429772-2563-42dd-958c-40c9500c6778',kw:'호왕화',
   res:'정면 돌파형 리더. 본능이 강하고, 지켜야 할 것 앞에서는 맹수가 된다. 자신감 없는 사역사의 등을 가장 크게 밀어주는 타입이에요.',
   el:'"넌 내가 고른 사역사야." 엘리나가 가장 듣고 싶었던 말을 해줄 수 있는 존재.'},
- {k:'th',n:'월영호족 · 흑뢰',en:'MOONTIGER · THUNDER',ep:'월영호족 · 여성형',c:'#ffd76a',f:'4024ddc9-b629-45b2-8a97-d068afb5b323',kw:'흑뢰',
+ {k:'th',n:'카르시아',en:'KARSIA',ep:'월영호족 · 흑뢰',c:'#ffd76a',f:'4024ddc9-b629-45b2-8a97-d068afb5b323',kw:'흑뢰',
   res:'번개 같은 판단과 행동. 자유롭고 예측 불가, 생각보다 몸이 먼저 움직인다. 지루한 사역원 생활을 단숨에 뒤집어 놓을 타입이에요.',
   el:'조용한 걸 좋아하는 엘리나는 매일 당신에게 끌려다니겠지만… 어쩐지 웃는 날이 늘어날 거예요.'}
 ];
